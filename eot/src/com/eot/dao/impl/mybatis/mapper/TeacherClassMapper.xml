@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eot.model.TeacherClass">
+
+    <resultMap type="TeacherClass" id="TeacherClassMap">
+        <result column="teacher_no" property="teacherNo"/>
+        <result column="course_no" property="courseNo"/>
+        <result column="grade" property="grade"/>
+        <result column="term" property="term"/>
+        <result column="major_no" property="majorNo"/>
+        <result column="class_no" property="classNo"/>
+        <result column="year" property="year"/>
+    </resultMap>
+
+	<select id="findAllTeacherClass" parameterType="map" resultMap="TeacherClassMap">
+            SELECT teacher_no, course_no, grade, term, class_no, year
+            FROM evaluation
+            WHERE 1 = 1
+            <choose>
+            	<when test="teacherNo != null">
+            		AND teacher_no = #{teacherNo}
+            	</when>
+            	<otherwise>
+            		<if test="year != null">
+            			AND year = #{year}
+            		</if>
+            		<if test="term != null">
+            			AND term = #{term}
+            		</if>
+            		<if test="year != null">
+            			AND dept = #{dept}
+            		</if>
+            	</otherwise>
+            </choose>
+            ORDER BY create_time desc,class_no asc
+            LIMIT #{offset},#{pageSize}
+    </select>
+
+	<select id="getTotalCount" parameterType="map" resultType="int">
+            SELECT count(1) num
+            FROM evaluation
+            WHERE 1 = 1
+            <choose>
+            	<when test="teacherNo != null">
+            		AND teacher_no = #{teacherNo}
+            	</when>
+            	<otherwise>
+            		<if test="year != null">
+            			AND year = #{year}
+            		</if>
+            		<if test="term != null">
+            			AND term = #{term}
+            		</if>
+            		<if test="year != null">
+            			AND dept = #{dept}
+            		</if>
+            	</otherwise>
+            </choose>
+    </select>
+   
+</mapper>

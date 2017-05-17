@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+    overflow: hidden;
+}
+
+input:focus{
+    outline: 0;
+}
+
+.btn:focus{
+    outline: 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+input,button,select,textarea{outline:none}
+
+a {
+	outline: none;
+}
+
+a:focus {
+	outline: none;
+}

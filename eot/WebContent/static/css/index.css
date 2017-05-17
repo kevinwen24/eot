@@ -1,0 +1,86 @@
+.my_info_dropdown_menu li {
+	height: 33px;
+	line-height: 33px;
+}
+
+.navigation .person_info{
+	height: 150px;
+	background: url("../images/header-profile.png");
+	color: #a7b1c2;
+    font-weight: 600;
+    text-align: center;
+}
+
+.navigation .nav_container {
+	padding-top: 10px;
+}
+
+.menu .header_nav {
+	height: 46px;
+	line-height: 46px;
+	display: inline-block;
+	width: 100%;
+	position: relative;
+	padding-left:20px ;
+}
+
+.menu .header_nav:hover {
+	background: #293846;
+}
+
+.menu .header_nav span{
+	position: absolute;
+	vertical-align: middle;
+	left: 170px;
+	top: 15px;
+}
+.menu li.second_nav {
+	height: 35px;
+	line-height: 35px;
+	width: 100%;
+	padding-left:50px ;
+}
+
+.second_container {
+	display: none;
+	border-left: 3px solid #19AA8D;	
+}
+
+.navigation .nav_container li a {
+	color: #a7b1c2;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.navigation .nav_container li a:hover{
+	color: #fff;
+}
+
+
+.second_nav:hover {
+	background: #293846;
+}
+
+.menu li.second_nav i {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+
+i.nav_icon_1 {
+	background: #1AB394;
+}
+
+i.nav_icon_2 {
+	background: #EF5352;
+}
+
+i.nav_icon_3 {
+	background: #1C84C6;
+}
+
+i.nav_icon_4 {
+	background: #F8AC59;
+}

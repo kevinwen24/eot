@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eot.model.ClassInfo">
+
+    <resultMap type="ClassInfo" id="ClassInfoMap">
+        <id column="class_no" property="classNo"/>
+        <result column="class_index" property="classIndex"/>
+        <result column="major_no" property="majorNo"/>
+    </resultMap>
+	
+	<select id="getClassInfoBysmajorNo" parameterType="int" resultMap="ClassInfoMap">
+		<![CDATA[
+			SELECT class_no, class_index, major_no
+			FROM class
+			WHERE major_no = #{major_no}
+		]]>
+	</select>
+	
+	<select id="getClassInfoByclassNo" parameterType="int" resultMap="ClassInfoMap">
+		<![CDATA[
+			SELECT class_no, class_index, major_no
+			FROM class
+			WHERE class_no = #{class_no}
+		]]>
+	</select>
+
+	<insert id="addClassInfo" parameterType="map">
+		<![CDATA[
+			INSERT INTO class(class_index, major_no)
+			VALUES(#{class_index}, #{major_no})
+		]]>
+	</insert>
+</mapper>
