@@ -39,8 +39,21 @@ public class CategoryItemoController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		List<CategoryItem> items = categoryItemService.findAllItem();
+		List<CategoryItem> categoryItems = categoryItemService.findAllCategoryIsActive();
+		modelAndView.addObject("categoryItems", categoryItems);
 		modelAndView.addObject("items", items);
 		modelAndView.addObject("forwardPage", "view_item");
+		modelAndView.setViewName("index");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/show_add_item", method = {RequestMethod.GET})
+	public ModelAndView showAddView() {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		List<CategoryItem> categoryItems = categoryItemService.findAllCategoryIsActive();
+		modelAndView.addObject("categoryItems", categoryItems);
+		modelAndView.addObject("forwardPage", "show_add_item");
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
@@ -59,6 +72,7 @@ public class CategoryItemoController {
 				session.setAttribute("success_message", "成功删除一条评教分类!");
 			}catch (Exception e) {
 				e.printStackTrace();
+				e.printStackTrace();
 				session.setAttribute("fail_message", "删除评教分类失败!");
 			}
 		} else {
@@ -66,6 +80,7 @@ public class CategoryItemoController {
 				categoryItemService.updateCategoryName(categoryNo, categoryName);
 				session.setAttribute("success_message", "成功更新一条评教分类!");
 			}catch (Exception e) {
+				e.printStackTrace();
 				session.setAttribute("fail_message", "更新评教分类失败!");
 			}
 		}
@@ -73,19 +88,33 @@ public class CategoryItemoController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = "/update_item", method = {RequestMethod.GET})
+	@RequestMapping(value = "/update_item", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView updateItem(
-									@RequestParam(value="itemNo") String itemNo,
-									@RequestParam(value="itemName") String itemName,
-									@RequestParam(value="categoryNo") int categoryNo,
+									@RequestParam(value="itemNo") int itemNo,
+									@RequestParam(value="itemName", defaultValue="0") String itemName,
+									@RequestParam(value="categoryNo",defaultValue="0" ) int categoryNo,
 									HttpSession session
 									) {
-		ModelAndView modelAndView = new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView("redirect:/page/manager/view_item");
 		
-		List<CategoryItem> items = categoryItemService.findAllItem();
-		modelAndView.addObject("items", items);
-		modelAndView.addObject("forwardPage", "view_item");
-		modelAndView.setViewName("index");
+		if("0".equals(itemName) && 0 == categoryNo){
+			try{
+				categoryItemService.deleteItem(itemNo);
+				session.setAttribute("success_message", "成功删除一条评教项!");
+			}catch (Exception e) {
+				e.printStackTrace();
+				session.setAttribute("fail_message", "删除评教项失败!");
+			}
+		} else {
+			try{
+				categoryItemService.updateItem(itemNo, categoryNo, itemName);
+				session.setAttribute("success_message", "成功更新一条评教项!");
+			}catch (Exception e) {
+				e.printStackTrace();
+				session.setAttribute("fail_message", "更新评教项失败!");
+			}
+		}
+		
 		return modelAndView;
 	}
 	
@@ -94,7 +123,7 @@ public class CategoryItemoController {
 									@RequestParam(value="categoryName") String categoryName,
 									HttpSession session
 									) {
-		ModelAndView modelAndView = new ModelAndView("redirct:/page/manager/view_category");
+		ModelAndView modelAndView = new ModelAndView("redirect:/page/manager/view_category");
 		
 		try{
 			categoryItemService.addCategory(categoryName);
@@ -112,12 +141,13 @@ public class CategoryItemoController {
 								@RequestParam(value="categoryNo") int categoryNo,
 								HttpSession session
 								) {
-		ModelAndView modelAndView = new ModelAndView("redirct:/page/manager/view_item");
+		ModelAndView modelAndView = new ModelAndView("redirect:/page/manager/view_item");
 		
 		try{
 			categoryItemService.addItem(categoryNo, itemName);
 			session.setAttribute("success_message", "成功添加一条评教项!");
 		}catch (Exception e) {
+			e.printStackTrace();
 			session.setAttribute("fail_message", "添加评教项失败!");
 		}
 		return modelAndView;

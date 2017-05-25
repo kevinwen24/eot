@@ -18,6 +18,8 @@ public class CategoryItemDaoImpl extends SqlSessionDaoSupport implements ICatego
 	private static final String SQL_ID_addItem = ".addItem";
 	private static final String SQL_ID_findAllCategory = ".findAllCategory";
 	private static final String SQL_ID_findAllItem = ".findAllItem";
+	private static final String SQL_ID_findAllCategoryIsActive = ".findAllCategoryIsActive";
+	private static final String SQL_ID_findAllItemIsActive = ".findAllItem";
 	private static final String SQL_ID_updateCategoryName = ".updateCategoryName";
 	private static final String SQL_ID_updateItem = ".updateItem";
 	private static final String SQL_ID_deleteItem = ".deleteItem";
@@ -31,7 +33,7 @@ public class CategoryItemDaoImpl extends SqlSessionDaoSupport implements ICatego
 	public void addItem(int categoryNo, String itemName) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("categoryNo", categoryNo);
-		params.put("itemName", itemName);
+		params.put("name", itemName);
 		getSqlSession().insert(CLASS_NAME + SQL_ID_addItem, params);
 	}
 	@Override
@@ -44,6 +46,19 @@ public class CategoryItemDaoImpl extends SqlSessionDaoSupport implements ICatego
 		
 		return getSqlSession().selectList(CLASS_NAME + SQL_ID_findAllItem);
 	}
+	
+	@Override
+	public List<CategoryItem> findAllCategoryIsActive() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList(CLASS_NAME + SQL_ID_findAllCategoryIsActive);
+	}
+	@Override
+	public List<CategoryItem> findAllItemIsActive() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList(CLASS_NAME + SQL_ID_findAllItemIsActive);
+	}
+	
+	
 	@Override
 	public void updateCategoryName(int categoryNo, String categoryName) {
 		Map<String, Object> params = new HashMap<>();
@@ -70,6 +85,5 @@ public class CategoryItemDaoImpl extends SqlSessionDaoSupport implements ICatego
 		
 		getSqlSession().delete(CLASS_NAME + SQL_ID_deleteCategory, categoryNo);
 	}
-	
 	
 }

@@ -58,14 +58,14 @@
 							<a class="header_nav" href="javascript:void(0)">评教分类  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_category")%>">查看分类</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemhacg")%>">添加分类</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=add_category")%>">添加分类</a></li>
  							</ul>
 						</li>
 						<li>
 							<a class="header_nav" href="javascript:void(0)">评教项  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_item")%>">查看评教项</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemcmmuuu")%>">添加评教项</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/show_add_item")%>">添加评教项</a></li>
 							</ul>
 						</li>
 						<li>

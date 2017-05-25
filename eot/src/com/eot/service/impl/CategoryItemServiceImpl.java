@@ -38,6 +38,18 @@ public class CategoryItemServiceImpl implements ICategoryItemService{
 	}
 
 	@Override
+	public List<CategoryItem> findAllCategoryIsActive() {
+		// TODO Auto-generated method stub
+		return iCategoryItemDao.findAllCategoryIsActive();
+	}
+
+	@Override
+	public List<CategoryItem> findAllItemIsActive() {
+		// TODO Auto-generated method stub
+		return iCategoryItemDao.findAllItemIsActive();
+	}
+	
+	@Override
 	public void updateCategoryName(int categoryNo, String categoryName) {
 		// TODO Auto-generated method stub
 		iCategoryItemDao.updateCategoryName(categoryNo, categoryName);

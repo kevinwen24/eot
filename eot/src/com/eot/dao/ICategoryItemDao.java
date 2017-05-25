@@ -14,6 +14,10 @@ public interface ICategoryItemDao {
 	
 	public List<CategoryItem> findAllItem();
 	
+	public List<CategoryItem> findAllCategoryIsActive();
+	
+	public List<CategoryItem> findAllItemIsActive();
+	
 	public void updateCategoryName(int categoryNo, String categoryName);
 	
 	public void updateItem(int itemNo, int categoryNo, String itemName);
