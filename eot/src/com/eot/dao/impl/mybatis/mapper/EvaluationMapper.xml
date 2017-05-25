@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eot.model.Evaluation">
+
+    <resultMap type="Evaluation" id="EvaluationMap">
+   		<id column="evaluation_no" property="evaluationNo"/>
+        <result column="item_no" property="itemNo"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="item_name" property="itemName"/>
+    	<result column="teacher_no" property="teacherNo"/>
+        <result column="course_no" property="courseNo"/>
+        <result column="year" property="year"/>
+        <result column="term" property="term"/>
+        <result column="class_no" property="teacherNo"/>
+        <result column="stu_number" property="studentNum"/>
+        <result column="score" property="teacherNo"/>
+    </resultMap>
+
+	<select id="getStudentAllNeedEvaluatonClass" parameterType="map" resultMap="EvaluationMap">
+            SELECT teacher_class.evaluation_no , teacher_class.teacher_no, teacher_class.course_no, 
+            		year, term, teacher_class.class_no, dept.name deptName, user.name teacherName, 
+            		course.course_name courseName
+            FROM teacher_class, teacher, course, user, dept
+            WHERE 
+            	class_no = #{classNo}
+            AND
+            	year = #{year}
+            AND
+            	term = #{term}
+            AND
+             	teacher_class.teacher_no = teacher.teacher_no
+            AND
+            	teacher_class.teacher_no = user.user_no
+            AND
+            	course.course_no = teacher_class.course_no
+			AND
+				dept.dept_no = teacher.dept_no
+    </select>
+    
+    <select id="getStudentNeedEvaluationItemByevaluationNo" parameterType="int" resultMap="EvaluationMap">
+    		SELECT evaluation.evaluation_no , evaluation.item_no, category.name category_name, item.name item_name
+            FROM evaluation, item, category
+            WHERE 
+            	evaluation_no = #{evaluationNo}
+			AND
+            	evaluation.item_no = item.item_no
+            AND
+            	item.category_no = category.category_no 
+    </select>
+    
+    <insert id="addEvaluationItemToevaluationNo" parameterType="map">
+    	INSERT INTO evaluation(evaluation.evaluation_no, evaluation.item_no) 
+    	VALUES(#{evaluationNo},#{itemNo})
+    </insert>
+    
+    <update id="updateScoreAndStuNum" parameterType="map">
+    	<![CDATA[
+	    	UPDATE evaluation
+	    	SET
+	    		student_num = student_num + 1,
+	    		score = score + #{score}
+	    	WHERE 
+	    		evaluation_no = #{evaluationNo}
+	    	AND
+	    		item_no = #{itemNo}
+    	]]>
+    </update>
+</mapper>

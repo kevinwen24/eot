@@ -1,18 +1,20 @@
 package com.eot.model;
 
 public class TeacherClass {
+	private Integer evaluationNo;
 	private int teacherNo;
 	private int courseNo;
 	private int majorNo;
 	private int classNo;
 	private int term;
+	private Integer classIndex;
 
 	private String teacherName;
 	private String teacherDept;
 	private String grade;
 	private String majorName;
-	private String className;
 	private String deptName;
+	private String courseName;
 	private String year;
 
 	public int getTeacherNo() {
@@ -87,12 +89,12 @@ public class TeacherClass {
 		this.majorName = majorName;
 	}
 
-	public String getClassName() {
-		return className;
+	public Integer getClassIndex() {
+		return classIndex;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
+	public void setClassIndex(Integer classIndex) {
+		this.classIndex = classIndex;
 	}
 
 	public String getDeptName() {
@@ -111,4 +113,20 @@ public class TeacherClass {
 		this.year = year;
 	}
 
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public Integer getEvaluationNo() {
+		return evaluationNo;
+	}
+
+	public void setEvaluationNo(Integer evaluationNo) {
+		this.evaluationNo = evaluationNo;
+	}
+	
 }

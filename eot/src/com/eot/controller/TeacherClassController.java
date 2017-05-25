@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import com.eot.common.*;
 import com.eot.model.TeacherClass;
@@ -18,7 +17,7 @@ import com.eot.util.PaginationUtil;
 import com.eot.util.PropertyUtil;
 
 @Controller
-@RequestMapping(Constants.APP_URL_TEACHER_CLASS)
+@RequestMapping(Constants.APP_URL_MANAGER)
 public class TeacherClassController extends BaseController{
 
 	@Autowired

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eot.model.EvaluationStatus">
+
+    <resultMap type="EvaluationStatus" id="EvaluationStatusMap">
+    	<result column="student_no" property="studentNo"/>
+        <result column="evaluation_no" property="evaluationNo"/>
+    </resultMap>
+
+	<select id="getStudentIsEvaluation" parameterType="map" resultType="Integer">
+            SELECT student_no
+            FROM evaluation_status
+            WHERE
+            	student_no = #{studentNo}
+            AND 
+            	evaluation_no = #{evaluationNo}
+    </select>
+    
+    <insert id="addStudentEvaluationStatus" parameterType="EvaluationStatus">
+    	INSERT INTO evaluation_status(student_no, evaluation_no)
+    	VALUES(#{studentNo}, #{evaluationNo})
+    </insert>
+</mapper>

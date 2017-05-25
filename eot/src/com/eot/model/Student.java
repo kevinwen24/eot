@@ -3,48 +3,55 @@ package com.eot.model;
 import java.util.Date;
 
 public class Student {
-	private int userId;
+
+	private Integer studentNo;
+	private Integer deptNo;
+	private Integer majorNo;
+	private Integer classNo;
+
 	private String name;
 	private String password;
-	private int role_id;
+	private int roleId;
 	private String gender;
 	private Date birthday;
-	private Date visit_date;
+	private String grade;
 	private String nativePlace;
 	private String address;
 	private String phone;
-	private String ClassName;
+	private String className;
 	private String majorName;
 	private String deptName;
-	
-	public Student() {
-		super();
+
+	public Integer getStudentNo() {
+		return studentNo;
 	}
 
-	public Student(int userId, String name, String password, int role_id, String gender, Date birthday, Date visit_date,
-			String nativePlace, String address, String phone, String className, String majorName, String deptName) {
-		super();
-		this.userId = userId;
-		this.name = name;
-		this.password = password;
-		this.role_id = role_id;
-		this.gender = gender;
-		this.birthday = birthday;
-		this.visit_date = visit_date;
-		this.nativePlace = nativePlace;
-		this.address = address;
-		this.phone = phone;
-		ClassName = className;
-		this.majorName = majorName;
-		this.deptName = deptName;
+	public void setStudentNo(Integer studentNo) {
+		this.studentNo = studentNo;
 	}
 
-	public int getUserId() {
-		return userId;
+	public Integer getDeptNo() {
+		return deptNo;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setDeptNo(Integer deptNo) {
+		this.deptNo = deptNo;
+	}
+
+	public Integer getMajorNo() {
+		return majorNo;
+	}
+
+	public void setMajorNo(Integer majorNo) {
+		this.majorNo = majorNo;
+	}
+
+	public Integer getClassNo() {
+		return classNo;
+	}
+
+	public void setClassNo(Integer classNo) {
+		this.classNo = classNo;
 	}
 
 	public String getName() {
@@ -63,12 +70,12 @@ public class Student {
 		this.password = password;
 	}
 
-	public int getRole_id() {
-		return role_id;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setRole_id(int role_id) {
-		this.role_id = role_id;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getGender() {
@@ -87,12 +94,12 @@ public class Student {
 		this.birthday = birthday;
 	}
 
-	public Date getVisit_date() {
-		return visit_date;
+	public String getGrade() {
+		return grade;
 	}
 
-	public void setVisit_date(Date visit_date) {
-		this.visit_date = visit_date;
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 
 	public String getNativePlace() {
@@ -120,11 +127,11 @@ public class Student {
 	}
 
 	public String getClassName() {
-		return ClassName;
+		return className;
 	}
 
 	public void setClassName(String className) {
-		ClassName = className;
+		this.className = className;
 	}
 
 	public String getMajorName() {
@@ -143,11 +150,4 @@ public class Student {
 		this.deptName = deptName;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [userId=" + userId + ", name=" + name + ", password=" + password + ", role_id=" + role_id
-				+ ", gender=" + gender + ", birthday=" + birthday + ", visit_date=" + visit_date + ", nativePlace="
-				+ nativePlace + ", address=" + address + ", phone=" + phone + ", ClassName=" + ClassName
-				+ ", majorName=" + majorName + ", deptName=" + deptName + "]";
-	}
 }

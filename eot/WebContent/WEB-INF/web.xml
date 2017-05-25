@@ -19,18 +19,29 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   
-  <filter>
-  	  <filter-name>encodingFilter</filter-name>
-  	  <filter-class>com.eot.filter.EncodeFilter</filter-class>
-  	   <init-param>
-      	  <param-name>encoding</param-name>
-      	  <param-value>utf-8</param-value>
-      </init-param>
+   <filter>
+    <display-name>SessionFilter</display-name>
+    <filter-name>SessionFilter</filter-name>
+    <filter-class>com.eot.filter.SessionFilter</filter-class>
   </filter>
   <filter-mapping>
-	  <filter-name>encodingFilter</filter-name>
-	  <url-pattern>/*</url-pattern>
+    <filter-name>SessionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>com.eot.filter.EncodeFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
   
   <servlet>
     <servlet-name>springmvc</servlet-name>
@@ -46,14 +57,13 @@
     <servlet-name>springmvc</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  
   <error-page>
-  	<error-code>500</error-code>
-  	<location>/static/500.html</location>
+    <error-code>500</error-code>
+    <location>/static/500.html</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/static/404.html</location>
   </error-page>
   
-  <error-page>
-  	<error-code>404</error-code>
-  	<location>/static/404.html</location>
-  </error-page>
 </web-app>

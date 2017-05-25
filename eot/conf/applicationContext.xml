@@ -67,11 +67,33 @@
        <property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
     </bean>
 
-   <bean id="teacherClassDao" class="com.eot.dao.impl.mybatis.TeacherClassDaoImpl" parent="baseDao" />
+    <bean id="teacherClassDao" class="com.eot.dao.impl.mybatis.TeacherClassDaoImpl" parent="baseDao" />
+     
+    <bean id="evaluationDao" class="com.eot.dao.impl.mybatis.EvaluationDaoImpl" parent="baseDao" />
+     
+    <bean id="evaluationStatusDao" class="com.eot.dao.impl.mybatis.EvaluationStatusDaoImpl" parent="baseDao" />
+     
+    <bean id="studentDao" class="com.eot.dao.impl.mybatis.StudentDaoImpl" parent="baseDao" />
+
+    <bean id="categoryItemDao" class="com.eot.dao.impl.mybatis.CategoryItemDaoImpl" parent="baseDao" />
      
     <bean id="teacherClassService" class="com.eot.service.impl.TeacherClassServiceImpl" scope="singleton" >
         <property name="teacherClassDao" ref="teacherClassDao" />
     </bean>
 
+ 	<bean id="evaluationService" class="com.eot.service.impl.EvaluationServiceImpl" scope="singleton" >
+        <property name="evaluationDao" ref="evaluationDao" />
+        <property name="studentDao" ref="studentDao" />
+        <property name="evaluationStatusDao" ref="evaluationStatusDao" />
+    </bean>
+    
+    <bean id="studentService" class="com.eot.service.impl.StudentServiceImpl" scope="singleton" >
+        <property name="studentDao" ref="studentDao" />
+    </bean>
+    
+    <bean id="categoryItemService" class="com.eot.service.impl.CategoryItemServiceImpl" scope="singleton" >
+        <property name="categoryItemDao" ref="categoryItemDao" />
+    </bean>
+	
     <bean class="com.eot.util.SpringUtil"></bean>
 </beans>

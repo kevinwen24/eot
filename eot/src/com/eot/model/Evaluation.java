@@ -1,102 +1,115 @@
 package com.eot.model;
 
-import java.util.Date;
-
 public class Evaluation {
-	private int teacherNo;
-	private int CourseNo;
-	private int classNo;
-	private Date year;
-	private int term;
-	private int categoryNo;
-	private int termNo;
-	private int score;
 	
-	public Evaluation() {
-		super();
+	private Integer evaluationNo;
+	private Integer teacherNo;
+	private Integer courseNo;
+	private Integer classNo;
+	private String year;
+	private Integer term;
+	private Integer itemNo;
+	// 评教人数
+	private Integer studentNum;
+	private float score;
+
+	private Integer categoryNo;
+	private String categoryName;
+
+	private String itemName;
+	private String teacherName;
+	private String courseName;
+	// 教师所属学院
+	private String deptName;
+	public Integer getEvaluationNo() {
+		return evaluationNo;
 	}
-	
-	public Evaluation(int teacherNo, int courseNo, int classNo, Date year, int term, int categoryNo, int termNo,
-			int score) {
-		super();
-		this.teacherNo = teacherNo;
-		CourseNo = courseNo;
-		this.classNo = classNo;
-		this.year = year;
-		this.term = term;
-		this.categoryNo = categoryNo;
-		this.termNo = termNo;
-		this.score = score;
+	public void setEvaluationNo(Integer evaluationNo) {
+		this.evaluationNo = evaluationNo;
 	}
-	
-	public int getTeacherNo() {
+	public Integer getTeacherNo() {
 		return teacherNo;
 	}
-
-	public void setTeacherNo(int teacherNo) {
+	public void setTeacherNo(Integer teacherNo) {
 		this.teacherNo = teacherNo;
 	}
-
-	public int getCourseNo() {
-		return CourseNo;
+	public Integer getCourseNo() {
+		return courseNo;
 	}
-
-	public void setCourseNo(int courseNo) {
-		CourseNo = courseNo;
+	public void setCourseNo(Integer courseNo) {
+		this.courseNo = courseNo;
 	}
-
-	public int getClassNo() {
+	public Integer getClassNo() {
 		return classNo;
 	}
-
-	public void setClassNo(int classNo) {
+	public void setClassNo(Integer classNo) {
 		this.classNo = classNo;
 	}
-
-	public Date getYear() {
+	public String getYear() {
 		return year;
 	}
-
-	public void setYear(Date year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
-
-	public int getTerm() {
+	public Integer getTerm() {
 		return term;
 	}
-
-	public void setTerm(int term) {
+	public void setTerm(Integer term) {
 		this.term = term;
 	}
-
-	public int getCategoryNo() {
-		return categoryNo;
+	public Integer getItemNo() {
+		return itemNo;
 	}
-
-	public void setCategoryNo(int categoryNo) {
-		this.categoryNo = categoryNo;
+	public void setItemNo(Integer itemNo) {
+		this.itemNo = itemNo;
 	}
-
-	public int getTermNo() {
-		return termNo;
+	public Integer getStudentNum() {
+		return studentNum;
 	}
-
-	public void setTermNo(int termNo) {
-		this.termNo = termNo;
+	public void setStudentNum(Integer studentNum) {
+		this.studentNum = studentNum;
 	}
-
-	public int getScore() {
+	public float getScore() {
 		return score;
 	}
-
-	public void setScore(int score) {
+	public void setScore(float score) {
 		this.score = score;
 	}
-
-	@Override
-	public String toString() {
-		return "Evaluation [teacherNo=" + teacherNo + ", CourseNo=" + CourseNo + ", classNo=" + classNo + ", year="
-				+ year + ", term=" + term + ", categoryNo=" + categoryNo + ", termNo=" + termNo + ", score=" + score
-				+ "]";
+	public Integer getCategoryNo() {
+		return categoryNo;
 	}
+	public void setCategoryNo(Integer categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+	public String getCategoryName() {
+		return categoryName;
+	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public String getTeacherName() {
+		return teacherName;
+	}
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
+	public String getCourseName() {
+		return courseName;
+	}
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+	public String getDeptName() {
+		return deptName;
+	}
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+	
 }

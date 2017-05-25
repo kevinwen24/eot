@@ -10,10 +10,11 @@
 	left:0;
 	top: 0;
 	background: #2F4050;
+	overflow: scroll;
 }
 
 .nav_container {
-	width: 200px;	
+	width: 200px;
 }
 
 .content {

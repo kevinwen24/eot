@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eot.model.CategoryItem">
+
+ 	<resultMap type="CategoryItem" id="CategoryItemMap">
+        <id column="category_no" property="categoryNo"/>
+        <result column="item_no" property="itemNo"/>
+        <result column="categoryName" property="categoryName"/>
+        <result column="itemName" property="itemName"/>
+        <result column="categoryActive" property="categoryActive"/>
+        <result column="itemActive" property="itemActive"/>
+    </resultMap>
+	
+	<insert id="addCategory" parameterType="String">
+		INSERT INTO category(name)
+		VALUES(#{name}) 
+	</insert>
+	
+	<insert id="addItem" parameterType="map">
+		INSERT INTO item(category_no, name)
+		VALUES(#{categoryNo}, #{categoryName}) 
+	</insert>
+	
+	<select id="findAllCategory" resultMap="CategoryItemMap">
+        <![CDATA[
+            SELECT category_no, name categoryName,is_active categoryActive
+            FROM  category
+            order by category_no desc
+        ]]>
+    </select>
+    
+	<select id="findAllItem" resultMap="CategoryItemMap">
+	 	<![CDATA[
+			SELECT category.category_no, category.name categoryName, item_no, item.name itemName,category.is_active categoryActive, item.is_active itemActive
+            FROM  item, category
+            WHERE item.category_no = category.category_no
+            order by item_no desc
+        ]]>
+	</select>
+	
+	<update id="updateCategoryName" parameterType="map">
+		UPDATE category
+		SET
+			name = #{categoryName}
+		WHERE 
+			category_no = #{categoryNo}
+	</update>
+	
+	<update id="updateItem" parameterType="map">
+		UPDATE item
+		SET name = name,
+		<if test="itemName != null ">
+			name = #{itemName}
+		</if>
+			name = name,
+		<if test="categoryNo != null">
+			category_no = #{categoryNo}
+		</if>
+		WHERE item_no = #{item_no}
+	</update>
+	
+	<update id="deleteItem" parameterType="int">
+		UPDATE item
+		SET is_active = -1
+		WHERE 
+		item_no = #{item_no}
+	</update>
+	
+	<update id="deleteCategory" parameterType="int">
+		UPDATE category
+		SET is_active = -1
+		WHERE 
+		 	category_no = #{categoryNo}
+	</update>
+</mapper>

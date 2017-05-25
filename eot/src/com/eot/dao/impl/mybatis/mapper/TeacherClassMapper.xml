@@ -2,21 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.eot.model.TeacherClass">
-
     <resultMap type="TeacherClass" id="TeacherClassMap">
+    	<id column="evaluation_no" property="evaluationNo"/>
         <result column="teacher_no" property="teacherNo"/>
         <result column="course_no" property="courseNo"/>
-        <result column="grade" property="grade"/>
-        <result column="term" property="term"/>
-        <result column="major_no" property="majorNo"/>
-        <result column="class_no" property="classNo"/>
         <result column="year" property="year"/>
+        <result column="term" property="term"/>
+        <result column="class_no" property="classNo"/>
+        <result column="deptName" property="deptName"/>
+        <result column="teacherName" property="teacherName"/>
+        <result column="courseName" property="courseName"/>
+        <result column="grade" property="grade"/>
+        <result column="class_index" property="classIndex"/>
+        <result column="majorName" property="majorName"/>
     </resultMap>
 
 	<select id="findAllTeacherClass" parameterType="map" resultMap="TeacherClassMap">
-            SELECT teacher_no, course_no, grade, term, class_no, year
-            FROM evaluation
-            WHERE 1 = 1
+            SELECT teacher_class.evaluation_no,dept.name deptName, teacher_class.teacher_no, user.name teacherName,
+            		year, term,  teacher_class.course_no, course.course_name courseName, 
+            		class.class_no, class.grade, major.`name` majorName, class.class_index
+            FROM teacher_class, teacher, dept, user, course, class, major
+            WHERE
+            	teacher_class.teacher_no = teacher.teacher_no
+            AND
+            	user.user_no = teacher_class.teacher_no
+            AND
+            	dept.dept_no = teacher.dept_no
+            AND 
+           	teacher_class.course_no = course.course_no
+			AND
+				teacher_class.class_no = class.class_no
+			AND
+				class.major_no = major.major_no
             <choose>
             	<when test="teacherNo != null">
             		AND teacher_no = #{teacherNo}
@@ -39,7 +56,7 @@
 
 	<select id="getTotalCount" parameterType="map" resultType="int">
             SELECT count(1) num
-            FROM evaluation
+            FROM teacher_class
             WHERE 1 = 1
             <choose>
             	<when test="teacherNo != null">

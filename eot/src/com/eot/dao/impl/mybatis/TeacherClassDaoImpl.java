@@ -64,4 +64,6 @@ public class TeacherClassDaoImpl extends SqlSessionDaoSupport implements ITeache
 		return 0;
 	}
 
+	
+
 }

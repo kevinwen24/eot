@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.eot.dao.IStudentDao">
+<mapper namespace="com.eot.model.Student">
 
-    <resultMap type="Student" id="TeacherClassMap">
+    <resultMap type="Student" id="StudentMap">
         <id column="id" property="id"/>
         <result column="question_id" property="questionId"/>
         <result column="title" property="title"/>
@@ -17,7 +17,7 @@
         <result column="is_alive" property="isAlive"/>
     </resultMap>
 
-	<select id="findAllTeacherClass" parameterType="map" resultMap="TeacherClassMap">
+	<select id="findAllTeacherClass" parameterType="map" resultMap="StudentMap">
         <![CDATA[
             SELECT id, teacher_no, teacher_name, teacher_dept, grade, title, major_name, class_no, major_name, depet_name, course_name, year, term
             FROM evaluation , teacher, dept, user ,
@@ -27,5 +27,18 @@
             LIMIT #{offset},#{pageSize}
         ]]>
     </select>
-
+    
+	<select id="getStudentClassNo" parameterType="int" resultType="int">
+		SELECT class_no
+		FROM student
+		WHERE student_no = #{student_no}
+	</select>
+	
+	<update id="updatePasswordByUserNo" parameterType="map">
+		UPDATE user
+		SET
+			password = #{password}
+		WHERE 
+			user_no = #{studentNo}
+	</update>
 </mapper>

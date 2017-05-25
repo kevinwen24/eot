@@ -1,0 +1,72 @@
+@CHARSET "UTF-8";
+
+.add_teacher_class_content {
+	overflow:auto;
+	
+}
+
+.add_teacher_class_content table{
+	margin-left: 70px;
+}
+
+.add_teacher_class_content table tr td {
+	height: 50px;
+	line-height: 50px;	
+}
+
+.add_teacher_class_content table tr .input_tip {
+	width:100px;
+	text-align: right;
+}
+
+.add_teacher_class_content table tr .input_content {
+		width:850px;
+}
+
+.add_teacher_class_content table tr .input_content select {
+	 margin-left: 50px;
+	 width:350px;
+}
+
+.add_teacher_class_content table tr .input_content select option {
+	height: 30px;
+	line-height: 30px;	
+}
+
+.add_teacher_class_content table tr .input_content select.all_select {
+	 width:200px;
+	 float: left;
+}
+
+.add_teacher_class_content table tr .input_content .controll_class{
+	width:100px;
+	display: inline-block;
+	float: left;
+	color:red;
+	border:1px solid #ccc;
+	border-radius:5px;
+	margin-left: 40px;
+	height: 150px;
+	background: #fff;
+}
+
+.add_teacher_class_content table tr .input_content .controll_class span {
+	display: block;
+	width: 60px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	margin: 5px auto;
+	background: #1AB394;
+	border-radius: 4px;
+	color: #fff;
+}
+
+.add_teacher_class_content table tr .input_content .controll_class span:hover {
+	cursor: pointer;
+}
+
+.add_teacher_class_content table tr .input_content select.commit_select {
+	 width:200px;
+	 float: left;
+}

@@ -3,23 +3,19 @@ package com.eot.model;
 import java.util.Date;
 
 public class User {
+
 	private int userId;
 	private String name;
 	private String password;
-	private int role_id;
+	private int roleId;
 	private String gender;
-	private Date birthday;
-	private Date visit_date;
-	private String nativePlace;
-	private String address;
+	private Date createDate;
+	private Date lastLoginDate;
+	private String grade;
 	private String phone;
-	private String ClassName;
+	private String className;
 	private String majorName;
 	private String deptName;
-	
-	public User() {
-		super();
-	}
 
 	public int getUserId() {
 		return userId;
@@ -45,12 +41,12 @@ public class User {
 		this.password = password;
 	}
 
-	public int getRole_id() {
-		return role_id;
+	public int getRoleId() {
+		return roleId;
 	}
 
-	public void setRole_id(int role_id) {
-		this.role_id = role_id;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getGender() {
@@ -61,36 +57,28 @@ public class User {
 		this.gender = gender;
 	}
 
-	public Date getBirthday() {
-		return birthday;
+	public Date getCreateDate() {
+		return createDate;
 	}
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
-	public Date getVisit_date() {
-		return visit_date;
+	public Date getLastLoginDate() {
+		return lastLoginDate;
 	}
 
-	public void setVisit_date(Date visit_date) {
-		this.visit_date = visit_date;
+	public void setLastLoginDate(Date lastLoginDate) {
+		this.lastLoginDate = lastLoginDate;
 	}
 
-	public String getNativePlace() {
-		return nativePlace;
+	public String getGrade() {
+		return grade;
 	}
 
-	public void setNativePlace(String nativePlace) {
-		this.nativePlace = nativePlace;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 
 	public String getPhone() {
@@ -102,11 +90,11 @@ public class User {
 	}
 
 	public String getClassName() {
-		return ClassName;
+		return className;
 	}
 
 	public void setClassName(String className) {
-		ClassName = className;
+		this.className = className;
 	}
 
 	public String getMajorName() {
@@ -125,11 +113,4 @@ public class User {
 		this.deptName = deptName;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", name=" + name + ", password=" + password + ", role_id=" + role_id
-				+ ", gender=" + gender + ", birthday=" + birthday + ", visit_date=" + visit_date + ", nativePlace="
-				+ nativePlace + ", address=" + address + ", phone=" + phone + ", ClassName=" + ClassName
-				+ ", majorName=" + majorName + ", deptName=" + deptName + "]";
-	}
 }

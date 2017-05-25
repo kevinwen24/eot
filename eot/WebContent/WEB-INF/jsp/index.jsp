@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="<%=PropertyUtil.getStaticUrl() %>css/index.css" />
 		<link rel="stylesheet" href="<%=PropertyUtil.getStaticUrl() %>css/bootstrap.css" />
 		<link rel="stylesheet" href="<%=PropertyUtil.getStaticUrl() %>css/content.css" />
+		<link rel="stylesheet" href="<%=PropertyUtil.getStaticUrl() %>css/add_teacher_class.css" />
 		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/plugins/jquery-1.10.2.js" ></script>
 		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/plugins/bootstrap.js" ></script>
 		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/plugins/animation.js" ></script>
@@ -20,19 +21,19 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="navigation">
+			<div class="navigation" >
 				<div class="person_info">
 					<img src="<%=PropertyUtil.getStaticUrl() %>images/2015113173643639.png" alt="兰州理工大学" width="200">
 					<p class="">工号:000001</p>
 					<p class="">管理员 <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></p>
 				</div>
-				<div class="nav_container">
+				<div class="nav_container" >
 					<ul class="menu">
 						<li>
 							<a class="header_nav" href="javascript:void(0)">授课管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="/eot/page/manager/forward?action=teacher_class">授课信息</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="/eot/page/manager/forward?action=add_teacher_class">增加授课</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=teacher_class") %>">授课信息</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=add_teacher_class") %>">增加授课</a></li>
 								<li class="second_nav"><i class="nav_icon_3"></i><a href="=">批量增加授课</a></li>
 							</ul>
 						</li>
@@ -50,6 +51,33 @@
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="=student_manager.html">学生管理</a></li>
 								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">增加学生</a></li>
 								<li class="second_nav"><i class="nav_icon_3"></i><a href="=">批量增加学生</a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="header_nav" href="javascript:void(0)">评教分类  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<ul class="second_container">
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_category")%>">查看分类</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">添加分类</a></li>
+ 							</ul>
+						</li>
+						<li>
+							<a class="header_nav" href="javascript:void(0)">评教项  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<ul class="second_container">
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_item")%>">查看评教项</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">添加评教项</a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="header_nav" href="javascript:void(0)">设置时间  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<ul class="second_container">
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="=student_manager.html">设置评教时间</a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="header_nav" href="javascript:void(0)">统计图表  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<ul class="second_container">
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="=student_manager.html">排名</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">统计图</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -98,6 +126,7 @@
 				if ($(nav_lis[i]).find("a").attr("href").split("=")[1] == currentPage) {
 					console.log($(nav_lis[i]).find("a").attr("href"));
 					console.log(currentPage);
+					$(nav_lis[i]).parent().prev().find("span").attr("class","glyphicon glyphicon-chevron-down");
 					$(nav_lis[i]).css("background","#293846");
 					$(nav_lis[i]).find("a").css("color","#fff");
 					$(nav_lis[i]).parent("ul").slideDown();

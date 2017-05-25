@@ -8,5 +8,4 @@ public class EotLoggerAppender extends DailyRollingFileAppender{
     public boolean isAsSevereAsThreshold(Priority priority) {
         return this.getThreshold().equals(priority);
     }
-
 }

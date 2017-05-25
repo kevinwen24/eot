@@ -15,13 +15,23 @@ public class PaginationUtil {
 			return pageIndex;
 		}
 		
-		if ((pageCount - currentPage) > 5) {
+		if ((pageCount - currentPage) >= 5 && currentPage == 1) {
+			pageIndex = new int[5];
+			pageIndex[0] = 1;
+			pageIndex[1] = 2 ;
+			pageIndex[2] = -1;
+			pageIndex[3] = pageCount - 1;
+			pageIndex[4] = pageCount;
+			return pageIndex;
+		}
+		
+		if ((pageCount - currentPage) >= 5 && currentPage != 1) {
 			pageIndex = new int[5];
 			pageIndex[0] = currentPage - 1;
 			pageIndex[1] = currentPage ;
 			pageIndex[2] = -1;
 			pageIndex[3] = currentPage + 1;
-			pageIndex[4] = currentPage + 2;
+			pageIndex[4] = pageCount;
 			return pageIndex;
 		}
 		
