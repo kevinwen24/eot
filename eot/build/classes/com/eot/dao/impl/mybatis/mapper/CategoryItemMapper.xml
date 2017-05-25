@@ -68,9 +68,16 @@
 	</update>
 	
 	<update id="deleteCategory" parameterType="int">
+		<![CDATA[
 		UPDATE category
 		SET is_active = -1
 		WHERE 
 		 	category_no = #{categoryNo}
+		;
+		UPDATE item
+		SET 
+		is_active = -1
+		where category_no = #{categoryNo}
+		]]>
 	</update>
 </mapper>

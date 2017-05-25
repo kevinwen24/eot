@@ -47,16 +47,29 @@ public class CategoryItemoController {
 	
 	@RequestMapping(value = "/update_category", method = {RequestMethod.GET})
 	public ModelAndView updateCategory(
-										@RequestParam(value="categoryNo") String categoryNo,
-										@RequestParam(value="categoryName") String categoryName,
+										@RequestParam(value="categoryNo") int categoryNo,
+										@RequestParam(value="categoryName",defaultValue="0") String categoryName,
 										HttpSession session
 										) {
-		ModelAndView modelAndView = new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView("redirect:/page/manager/view_category");
 		
-		List<CategoryItem> categoryItems = categoryItemService.findAllCategory();
-		modelAndView.addObject("categoryItems", categoryItems);
-		modelAndView.addObject("forwardPage", "view_category");
-		modelAndView.setViewName("index");
+		if("0".equals(categoryName)){
+			try{
+				categoryItemService.deleteCategory(categoryNo);
+				session.setAttribute("success_message", "成功删除一条评教分类!");
+			}catch (Exception e) {
+				e.printStackTrace();
+				session.setAttribute("fail_message", "删除评教分类失败!");
+			}
+		} else {
+			try{
+				categoryItemService.updateCategoryName(categoryNo, categoryName);
+				session.setAttribute("success_message", "成功更新一条评教分类!");
+			}catch (Exception e) {
+				session.setAttribute("fail_message", "更新评教分类失败!");
+			}
+		}
+		
 		return modelAndView;
 	}
 	
@@ -85,8 +98,9 @@ public class CategoryItemoController {
 		
 		try{
 			categoryItemService.addCategory(categoryName);
-			session.setAttribute("fail_message", "成功添加一条评教分类!");
+			session.setAttribute("success_message", "成功添加一条评教分类!");
 		}catch (Exception e) {
+			e.printStackTrace();
 			session.setAttribute("fail_message", "添加评教分类失败!");
 		}
 		return modelAndView;
@@ -102,7 +116,7 @@ public class CategoryItemoController {
 		
 		try{
 			categoryItemService.addItem(categoryNo, itemName);
-			session.setAttribute("fail_message", "成功添加一条评教项!");
+			session.setAttribute("success_message", "成功添加一条评教项!");
 		}catch (Exception e) {
 			session.setAttribute("fail_message", "添加评教项失败!");
 		}

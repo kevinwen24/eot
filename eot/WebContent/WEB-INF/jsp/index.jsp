@@ -20,6 +20,7 @@
 		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/nav.js" ></script>
 	</head>
 	<body>
+	
 		<div class="container">
 			<div class="navigation" >
 				<div class="person_info">
@@ -34,50 +35,50 @@
 							<ul class="second_container">
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=teacher_class") %>">授课信息</a></li>
 								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=add_teacher_class") %>">增加授课</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="=">批量增加授课</a></li>
+								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itejydnmdw")%>">批量增加授课</a></li>
 							</ul>
 						</li>
 						<li>
 							<a class="header_nav" href="javascript:void(0)">学生管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="=student_manager.html" target="student_iframe">学生管理</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">增加学生</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="=">批量增加学生</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_ityteemx")%>" target="student_iframe">学生管理</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemyitixsax")%>">增加学生</a></li>
+								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemxitisa")%>">批量增加学生</a></li>
 							</ul>
 						</li>
 						<li>
 							<a class="header_nav" href="javascript:void(0)">老师管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="=student_manager.html">学生管理</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">增加学生</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="=">批量增加学生</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemiytin")%>">学生管理</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemfjt")%>">增加学生</a></li>
+								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemtuas")%>">批量增加学生</a></li>
 							</ul>
 						</li>
 						<li>
 							<a class="header_nav" href="javascript:void(0)">评教分类  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_category")%>">查看分类</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">添加分类</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemhacg")%>">添加分类</a></li>
  							</ul>
 						</li>
 						<li>
 							<a class="header_nav" href="javascript:void(0)">评教项  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_item")%>">查看评教项</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">添加评教项</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemcmmuuu")%>">添加评教项</a></li>
 							</ul>
 						</li>
 						<li>
 							<a class="header_nav" href="javascript:void(0)">设置时间  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="=student_manager.html">设置评教时间</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemdrdcm")%>">设置评教时间</a></li>
 							</ul>
 						</li>
 						<li>
 							<a class="header_nav" href="javascript:void(0)">统计图表  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="=student_manager.html">排名</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="=">统计图</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemmrrryr")%>">排名</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemnerm")%>">统计图</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -121,9 +122,23 @@
 	<script type="text/javascript">
 		$(function(){
 			var currentPage = $("#forwardPage").val();
+			console.log("currentPage="+currentPage);
 			var nav_lis = $(".second_nav");
 			for (var i = 0; i < nav_lis.length; i++) {
-				if ($(nav_lis[i]).find("a").attr("href").split("=")[1] == currentPage) {
+				var currentHref	= $(nav_lis[i]).find("a").attr("href");
+				//console.log(currentHref);
+				if(currentHref.indexOf("action") < 0){
+					if(currentHref.substring(18) == currentPage) {
+						console.info("currentHref=" + currentHref);
+						$(nav_lis[i]).parent().prev().find("span").attr("class","glyphicon glyphicon-chevron-down");
+						$(nav_lis[i]).css("background","#293846");
+						$(nav_lis[i]).find("a").css("color","#fff");
+						$(nav_lis[i]).parent("ul").slideDown();
+						break;
+					}
+				}
+					
+				if(currentHref.split("=")[1] == currentPage) {
 					console.log($(nav_lis[i]).find("a").attr("href"));
 					console.log(currentPage);
 					$(nav_lis[i]).parent().prev().find("span").attr("class","glyphicon glyphicon-chevron-down");
@@ -133,7 +148,6 @@
 					break;
 				}
 			}
-			
 			
 		});
 	</script>
