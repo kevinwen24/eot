@@ -8,7 +8,9 @@ public class SchoolInfo {
 	private String majorName;
 	private Integer classNo;
 	private Integer classIndex;
-
+	private Integer courseNo;
+	private String courseName;
+	
 	public Integer getDeptNo() {
 		return deptNo;
 	}
@@ -17,11 +19,11 @@ public class SchoolInfo {
 		this.deptNo = deptNo;
 	}
 
-	public String getdeptName() {
+	public String getDeptName() {
 		return deptName;
 	}
 
-	public void setdeptName(String deptName) {
+	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
 
@@ -57,4 +59,21 @@ public class SchoolInfo {
 		this.classIndex = classIndex;
 	}
 
+	public Integer getCourseNo() {
+		return courseNo;
+	}
+
+	public void setCourseNo(Integer courseNo) {
+		this.courseNo = courseNo;
+	}
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	
 }

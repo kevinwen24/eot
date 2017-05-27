@@ -7,8 +7,6 @@ import com.eot.util.Pagination;
 
 public interface IStudentService {
 	
-	public void updatePasswordByUserNo(int studentNo, String password);
-	
 	public void addStudent(Student student);
 	
 	public int deleteStudent(int[] Ids[]);

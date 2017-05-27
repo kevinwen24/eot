@@ -67,7 +67,7 @@
 							<a class="header_nav" href="javascript:void(0)">授课管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/teacher_class") %>">授课信息</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=add_teacher_class") %>">增加授课</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/show_addteacher_class") %>">增加授课</a></li>
 								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itejydnmdw")%>">批量增加授课</a></li>
 							</ul>
 						</li>

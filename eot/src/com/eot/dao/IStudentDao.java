@@ -9,8 +9,6 @@ public interface IStudentDao {
 
 	public int getStudentClassNo(int studentNo);
 	
-	public void updatePasswordByUserNo(int studentNo, String password);
-	
 	public void addStudent(Student student);
 	
 	public int deleteStudent(int[] Ids[]);

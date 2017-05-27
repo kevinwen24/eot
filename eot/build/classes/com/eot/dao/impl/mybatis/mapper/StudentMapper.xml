@@ -34,11 +34,4 @@
 		WHERE student_no = #{student_no}
 	</select>
 	
-	<update id="updatePasswordByUserNo" parameterType="map">
-		UPDATE user
-		SET
-			password = #{password}
-		WHERE 
-			user_no = #{studentNo}
-	</update>
 </mapper>

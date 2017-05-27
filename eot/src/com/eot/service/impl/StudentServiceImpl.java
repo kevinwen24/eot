@@ -15,11 +15,6 @@ public class StudentServiceImpl implements IStudentService{
 	}
 	
 	@Override
-	public void updatePasswordByUserNo(int studentNo, String password) {
-		iStudentDao.updatePasswordByUserNo(studentNo, password);		
-	}
-	
-	@Override
 	public void addStudent(Student student) {
 		
 	}

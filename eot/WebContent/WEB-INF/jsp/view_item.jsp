@@ -79,15 +79,18 @@
 			var itemNo = $(this).parent().parent().find(".stu_no").text().trim();
 			
 			nameStr = $(name).text();
+			console.log(nameStr);
 			$(name).html("<input type='input' name='itemName' class='form-control edit_name' value='"+nameStr+"' style='width:380px;height:30px;'>");
 			$(name).css({"padding-left":"10px","padding-top":"8px","height":"40px"});
 			$(categoryName).html("<select name='categoryNo' class='form-control select_dept'><option value='-1'>评教分类</option><%for(int i =0; i < categoryItems.size();i++){ %><option value='<%=categoryItems.get(i).getCategoryNo()%>'><%=categoryItems.get(i).getCategoryName() %></option><% }%></select>");
 			$(categoryName).css({"padding-left":"10px","padding-top":"6px"});
-			$(this).parent().html("<a href='' class='btn btn-success btn-small' style='margin-right:10px;'>取消</a><button class='btn btn-primary btn-small saveModifyData' style='z-index:100'>保存</button>");
+			$(this).parent().html("<a href='' class='btn btn-success btn-small' style='margin-right:10px;'>取消</a><button type='button' class='btn btn-primary btn-small saveModifyData' style='z-index:100'>保存</button>");
 			$("button.saveModifyData").click(function(){
-				if(nameStr != $(".edit_name").val()){
-					var itemform = $(this).parent().parent().prev().prev("form");
-					itemform.submit();
+				if( $(name).prev().find(".select_dept").val() > 0 || nameStr != $(name).find("input").val()){
+					var itemform = $(this).parent().parent().parent("form");
+					$(itemform).submit();
+				} else {
+					show_fail_message("输入需要修改数据！");
 				}
 			});
 		});

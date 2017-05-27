@@ -120,7 +120,7 @@ public class StudentEvaluationController extends BaseController{
 			lists.add(evaluation);
 		}
 		User user = (User)session.getAttribute("user");
-		evaluationService.updateScoreAndStuNum(lists, 13270132);
+		evaluationService.updateScoreAndStuNum(lists, user.getUserId());
 		ModelAndView modelAndView = new ModelAndView("redirect:/page/student/show");
 		return modelAndView;
 	}

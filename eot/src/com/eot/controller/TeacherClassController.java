@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.eot.common.*;
+import com.eot.model.SchoolInfo;
 import com.eot.model.TeacherClass;
+import com.eot.service.ISchoolInfoService;
 import com.eot.service.ITeacherClassService;
 import com.eot.util.Pagination;
 import com.eot.util.PaginationUtil;
@@ -22,6 +24,8 @@ public class TeacherClassController extends BaseController{
 
 	@Autowired
 	public ITeacherClassService iTeacherClassService;
+	@Autowired
+	public ISchoolInfoService SchoolInfoService;
 	
 	@RequestMapping(value = "/teacher_class", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView showTeacherClass(
@@ -92,6 +96,20 @@ public class TeacherClassController extends BaseController{
 		}
 		
 		modelAndView.addObject("forwardPage", action);
+		modelAndView.setViewName("index");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/show_addteacher_class", method = {RequestMethod.GET})
+	public ModelAndView showAddTeacherClass() {
+		ModelAndView modelAndView = new ModelAndView();
+		List<SchoolInfo> depts = SchoolInfoService.findAlldept();
+		List<SchoolInfo> majors = SchoolInfoService.findAllMajor();
+		List<SchoolInfo> courses = SchoolInfoService.findAllCourse();
+		modelAndView.addObject("depts", depts);
+		modelAndView.addObject("majors", majors);
+		modelAndView.addObject("courses", courses);
+		modelAndView.addObject("forwardPage", "show_addteacher_class");
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
