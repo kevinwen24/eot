@@ -92,7 +92,7 @@ public class CategoryItemoController {
 	public ModelAndView updateItem(
 									@RequestParam(value="itemNo") int itemNo,
 									@RequestParam(value="itemName", defaultValue="0") String itemName,
-									@RequestParam(value="categoryNo",defaultValue="0" ) int categoryNo,
+									@RequestParam(value="categoryNo",defaultValue="0" ) Integer categoryNo,
 									HttpSession session
 									) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/page/manager/view_item");
@@ -107,6 +107,10 @@ public class CategoryItemoController {
 			}
 		} else {
 			try{
+				if(categoryNo == -1){
+					categoryNo =null;
+				}
+				
 				categoryItemService.updateItem(itemNo, categoryNo, itemName);
 				session.setAttribute("success_message", "成功更新一条评教项!");
 			}catch (Exception e) {

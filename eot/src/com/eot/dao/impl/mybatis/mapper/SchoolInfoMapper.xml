@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eot.model.SchoolInfo">
+
+ 	<resultMap type="SchoolInfo" id="SchoolInfoMap">
+        <result column="dept_no" property="deptNo"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="major_no" property="majorNo"/>
+        <result column="major_name" property="majorName"/>
+        <result column="class_no" property="classNo"/>
+        <result column="class_index" property="classIndex"/>
+    </resultMap>
+	
+	
+	<select id="findAlldept" resultMap="SchoolInfoMap">
+        <![CDATA[
+            SELECT dept_no, name dept_name
+            FROM  dept
+            order by dept_no desc
+        ]]>
+    </select>
+    
+	<select id="findAllTeacherByDeptNo" resultMap="SchoolInfoMap" parameterType="int">
+	 	<![CDATA[
+			SELECT teacher.teacher_no,`user`.`name` teacher_name
+			FROM  dept,teacher,user
+			where 
+				dept.dept_no = teacher.dept_no
+			AND 
+				`user`.user_no = teacher.teacher_no
+			AND 
+				dept.dept_no = #{deptNo}
+			 order by teacher_no desc
+
+        ]]>
+	</select>
+	
+	<select id="findAllMajor" resultMap="SchoolInfoMap">
+        <![CDATA[
+            SELECT major.major_no,major.`name` major_name
+			FROM  major 
+			ORDER BY major_no desc
+        ]]>
+    </select>
+    
+    <select id="findAllClassByMajorNoAndGrade" resultMap="SchoolInfoMap" parameterType="map">
+	 	<![CDATA[
+			SELECT class.class_no,class.class_index,major.`name` major_name
+			from class,major
+			WHERE 
+				class.major_no=major.major_no
+			AND
+				class.grade = #{grade}
+			AND
+				major.major_no = #{majorNo}
+
+        ]]>
+	</select>
+	
+</mapper>

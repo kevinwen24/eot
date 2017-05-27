@@ -9,7 +9,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.eot.dao.ICategoryItemDao;
 import com.eot.model.CategoryItem;
-import com.eot.model.Evaluation;
 
 public class CategoryItemDaoImpl extends SqlSessionDaoSupport implements ICategoryItemDao{
 
@@ -66,8 +65,9 @@ public class CategoryItemDaoImpl extends SqlSessionDaoSupport implements ICatego
 		params.put("categoryName", categoryName);
 		getSqlSession().update(CLASS_NAME + SQL_ID_updateCategoryName, params);
 	}
+	
 	@Override
-	public void updateItem(int itemNo, int categoryNo, String itemName) {
+	public void updateItem(int itemNo, Integer categoryNo, String itemName) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("itemNo", itemNo);
 		params.put("categoryNo", categoryNo);

@@ -84,3 +84,17 @@ i.nav_icon_3 {
 i.nav_icon_4 {
 	background: #F8AC59;
 }
+
+.message_container {
+	 width:300px;
+	 position: fixed;
+	 left:550px;
+	 top:30px;
+	 height:40px;
+	 text-align: center;
+	 line-height: 40px;
+	 background: #76BD21;
+	 color: #fff;
+	 border-radius: 5px;
+	 z-index:10;
+}

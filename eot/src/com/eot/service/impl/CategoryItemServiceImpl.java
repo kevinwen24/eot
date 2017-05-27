@@ -56,7 +56,7 @@ public class CategoryItemServiceImpl implements ICategoryItemService{
 	}
 
 	@Override
-	public void updateItem(int itemNo, int categoryNo, String itemName) {
+	public void updateItem(int itemNo, Integer categoryNo, String itemName) {
 		// TODO Auto-generated method stub
 		iCategoryItemDao.updateItem(itemNo, categoryNo, itemName);
 	}

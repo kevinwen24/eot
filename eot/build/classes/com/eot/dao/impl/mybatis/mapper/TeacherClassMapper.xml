@@ -29,14 +29,14 @@
             AND
             	dept.dept_no = teacher.dept_no
             AND 
-           	teacher_class.course_no = course.course_no
+           		teacher_class.course_no = course.course_no
 			AND
 				teacher_class.class_no = class.class_no
 			AND
 				class.major_no = major.major_no
             <choose>
             	<when test="teacherNo != null">
-            		AND teacher_no = #{teacherNo}
+            		AND teacher_class.teacher_no = #{teacherNo}
             	</when>
             	<otherwise>
             		<if test="year != null">
@@ -45,8 +45,8 @@
             		<if test="term != null">
             			AND term = #{term}
             		</if>
-            		<if test="year != null">
-            			AND dept = #{dept}
+            		<if test="dept != null">
+            			AND dept.dept_no = #{dept}
             		</if>
             	</otherwise>
             </choose>
@@ -56,11 +56,22 @@
 
 	<select id="getTotalCount" parameterType="map" resultType="int">
             SELECT count(1) num
-            FROM teacher_class
-            WHERE 1 = 1
+            FROM teacher_class, teacher, dept, user, course, class, major
+            WHERE
+            	teacher_class.teacher_no = teacher.teacher_no
+            AND
+            	user.user_no = teacher_class.teacher_no
+            AND
+            	dept.dept_no = teacher.dept_no
+            AND 
+           		teacher_class.course_no = course.course_no
+			AND
+				teacher_class.class_no = class.class_no
+			AND
+				class.major_no = major.major_no
             <choose>
             	<when test="teacherNo != null">
-            		AND teacher_no = #{teacherNo}
+            		AND teacher_class.teacher_no = #{teacherNo}
             	</when>
             	<otherwise>
             		<if test="year != null">
@@ -69,8 +80,8 @@
             		<if test="term != null">
             			AND term = #{term}
             		</if>
-            		<if test="year != null">
-            			AND dept = #{dept}
+            		<if test="dept != null">
+            			AND dept.dept_no = #{dept}
             		</if>
             	</otherwise>
             </choose>

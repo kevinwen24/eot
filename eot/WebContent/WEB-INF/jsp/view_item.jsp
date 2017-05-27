@@ -81,7 +81,7 @@
 			nameStr = $(name).text();
 			$(name).html("<input type='input' name='itemName' class='form-control edit_name' value='"+nameStr+"' style='width:380px;height:30px;'>");
 			$(name).css({"padding-left":"10px","padding-top":"8px","height":"40px"});
-			$(categoryName).html("<select name='categoryNo' class='form-control select_dept'><%for(int i =0; i < categoryItems.size();i++){ %><option value='<%=categoryItems.get(i).getCategoryNo()%>'><%=categoryItems.get(i).getCategoryName() %></option><% }%></select>");
+			$(categoryName).html("<select name='categoryNo' class='form-control select_dept'><option value='-1'>评教分类</option><%for(int i =0; i < categoryItems.size();i++){ %><option value='<%=categoryItems.get(i).getCategoryNo()%>'><%=categoryItems.get(i).getCategoryName() %></option><% }%></select>");
 			$(categoryName).css({"padding-left":"10px","padding-top":"6px"});
 			$(this).parent().html("<a href='' class='btn btn-success btn-small' style='margin-right:10px;'>取消</a><button class='btn btn-primary btn-small saveModifyData' style='z-index:100'>保存</button>");
 			$("button.saveModifyData").click(function(){

@@ -23,15 +23,50 @@ public class TeacherClassController extends BaseController{
 	@Autowired
 	public ITeacherClassService iTeacherClassService;
 	
-	@RequestMapping(value = "/query", method = {RequestMethod.GET})
-	public ModelAndView showTeacherClass() {
-		Pagination pagination = new Pagination();
+	@RequestMapping(value = "/teacher_class", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView showTeacherClass(
+										@RequestParam (value="deptNo", required=false,  defaultValue="0") Integer deptNo,
+										@RequestParam (value="year",  required=false, defaultValue="0") Integer year,
+										@RequestParam (value="term",  required=false, defaultValue="0") Integer term,
+										@RequestParam (value="teacherNo", required=false, defaultValue="0") Integer teacherNo,
+										@RequestParam (value="currentPage", required=false, defaultValue="0") Integer currentPage,
+										@RequestParam (value="pageSize", required=false, defaultValue="0") Integer pageSize
+										) {
+		Pagination pagination = new Pagination(); 
+		
+		if(teacherNo != null && teacherNo > 0){
+			pagination.setTeacherNo(teacherNo);
+		}else{
+			
+			if(deptNo > 0 ){
+				pagination.setDeptNo(deptNo);
+			}
+			
+			if(year > 0){
+				pagination.setYear(year + "");
+			}
+			
+			if(term > 0){
+				pagination.setTerm(term - 1);
+			}
+		}
+		
+		if(pageSize != null && pageSize > 0) {
+			pagination.setPageSize(pageSize);
+		}
+		
+		if(currentPage != null && currentPage > 0) {
+			pagination.setPageSize(currentPage);
+		}
+		
+		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		List<TeacherClass> teacherClasss = iTeacherClassService.findAllTeacherClass(pagination);
 		modelAndView.addObject("pagination", pagination);
 		modelAndView.addObject("pageIndexs", PaginationUtil.getPageIndex(pagination));
 		modelAndView.addObject("teacherClasss", teacherClasss);
+		modelAndView.addObject("forwardPage", "teacher_class");
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}

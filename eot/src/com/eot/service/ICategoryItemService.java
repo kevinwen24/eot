@@ -20,7 +20,7 @@ public interface ICategoryItemService {
 	
 	public void updateCategoryName(int categoryNo, String categoryName);
 	
-	public void updateItem(int itemNo, int categoryNo, String itemName);
+	public void updateItem(int itemNo, Integer categoryNo, String itemName);
 	
 	public void deleteItem(int itemNo);
 	

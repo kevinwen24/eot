@@ -4,51 +4,55 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
-	String managerPath = PathUtil.getFullPath("manager/query");
+	String managerPath = PathUtil.getFullPath("manager/");
 %>
 
 <div id="content">
 	<div class="content_header">
 		<div class="search_student_dept_container">
-			<form class="form-inline">
-			<input type="hidden" value="${pagination.currentPage }" id="currentPage"> 
+		<form class="form-inline school_form" action="<%=managerPath %>teacher_class" method="post" >
+			<input type="hidden" value="${pagination.currentPage }" id="currentPage" name="currentPage">
+			<input type="hidden" value="${pagination.pageSize }" id="pageSize" name="pageSize"> 
+			<input type="hidden" value="${pagination.term }" id="term"> 
+			<input type="hidden" value="${pagination.year }" id="year"> 
 			<div class="form-group">
-			    <select class="form-control select_dept" >
-						<option>学院</option>
-						<option>jdbsfk</option>
-						<option>软件工程</option>
-						<option>jdbsfk</option>
+			    <select class="form-control select_dept" name="deptNo">
+						<option value="-1">教师所属学院</option>
+						<option value="12">jdbsfk</option>
+						<option value="23">软件工程</option>
+						<option value="202">jdbsfk</option>
 				</select>
 	  		</div>
 			<div class="form-group">
-			    <select class="form-control select_year" >
-						<option>日期</option>
-						<option>2013</option>
-						<option>2014</option>
-						<option>2015</option>
-						<option>2016</option>
-						<option>2017</option>
+			    <select class="form-control select_year" name="year">
+						<option value="-1">日期</option>
+						<option value="2013">2013</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+						<option value="2017">2017</option>
 				</select>
 	  		</div>		    
 		    <div class="form-group">
-		        <select class="form-control select_major" >
-					<option>学期</option>
-					<option>春季学期</option>
-					<option>秋季学期</option>
+		        <select class="form-control select_term" name="term">
+					<option value="-1">学期</option>
+					<option value="1">春季学期</option>
+					<option value="2">秋季学期</option>
 			    </select>
 		    </div>
 	  		<button type="submit" class="btn btn-info">查询</button>
-        </form>
+		</form>
 		</div>
-		
-        <div class="search_student_no_container">
-        	<input type="text" class="form-control search_student_no" placeholder="请输入老师职工号..." style="margin-left:100px;"/>
+		<div class="search_student_no_container">
+		<form class="teacher_class_form" action="<%=managerPath %>teacher_class" method="post" style="width:400px;60px;">
+        	<input type="text" class="form-control search_student_no" value="${pagination.teacherNo }" name="teacherNo" placeholder="请输入老师职工号..." style="margin-left:100px;"/>
         	<a href="javascript:void(0)">
-        		<span class="glyphicon glyphicon-search"></span>
+        		<span class="glyphicon glyphicon-search search_by_teacher_sub" ></span>
         	</a>
+        </form>
         </div>
-        
 	</div>
+	 
 	<div class="content_body">
 		<ul>
 			<li class="data_line">
@@ -93,7 +97,7 @@
 		    	<li class="pageIndex">
 		    			<c:choose>
 		    				<c:when test="${pageIndex != -1}">
-			    				<a href="">
+			    				<a href="javascript:void(0)" >
 			    					<c:out value="${pageIndex }"/>
 			    				</a>
 		    				</c:when>
@@ -122,7 +126,48 @@
 				$(pageIndexs[i]).addClass("active");
 			}
 		}
-	});
 		
+		$(".search_by_teacher_sub").click(function(){
+			if($(".search_student_no").val() == "" || isNaN($(".search_student_no").val())){
+				show_fail_message("输入不合法!");
+			} else {
+				$(".teacher_class_form").submit();
+			}
+		});
+		
+		if($("#term").val() >= 0){
+		   var childs = $(".select_term").children();
+			
+			for(var i = 0;i <childs.length; i++ ){
+				if($(childs[i]).attr("value") == $("#term").val().trim() - 0 + 1){
+					$(childs[i]).attr("selected","true");
+					break;
+				}
+			}
+		}
+		
+		if($("#year").val() >= 0){
+			   var childs = $(".select_year").children();
+				
+				for(var i = 0;i <childs.length; i++ ){
+					if($(childs[i]).attr("value") == $("#year").val().trim()){
+						$(childs[i]).attr("selected","true");
+						break;
+					}
+				}
+		}
+		
+		var paglis = $("ul.pagination").children("li.pageIndex");
+		for(var i = 0;i < paglis.length; i++ ){
+			$(paglis[i]).find("a").click(function(){
+				console.log($(paglis[i]).text().trim());
+				console.log($(paglis[i]).text().trim());
+				if($(paglis[i]).text().trim() > 0){
+					$("#currentPage").val($(paglis[i]).text().trim());
+					$(".school_form").submit();
+				}
+			});
+		}
+	});
 </script>
 

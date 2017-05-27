@@ -22,6 +22,8 @@ public class Student {
 	private String majorName;
 	private String deptName;
 
+	private Integer isActive;
+	
 	public Integer getStudentNo() {
 		return studentNo;
 	}
@@ -148,6 +150,14 @@ public class Student {
 
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
+	}
+
+	public Integer getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
 	}
 
 }

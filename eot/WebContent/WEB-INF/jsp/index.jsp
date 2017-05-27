@@ -14,12 +14,45 @@
 		<link rel="stylesheet" href="<%=PropertyUtil.getStaticUrl() %>css/bootstrap.css" />
 		<link rel="stylesheet" href="<%=PropertyUtil.getStaticUrl() %>css/content.css" />
 		<link rel="stylesheet" href="<%=PropertyUtil.getStaticUrl() %>css/add_teacher_class.css" />
+		<link rel="stylesheet" href="<%=PropertyUtil.getStaticUrl() %>css/plugins/jquery.datetimepicker.css" />
 		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/plugins/jquery-1.10.2.js" ></script>
 		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/plugins/bootstrap.js" ></script>
 		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/plugins/animation.js" ></script>
 		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/nav.js" ></script>
+		<script type="text/javascript" src="<%=PropertyUtil.getStaticUrl() %>js/common.js" ></script>
 	</head>
+	
 	<body>
+	
+	<!--flashMessage  -->
+<c:if test="${success_message != null }">
+	<div class="message_container" style="top:10px;">
+		${success_message}
+	</div>
+</c:if>
+
+<c:if test="${fail_message != null }">
+	<div class="message_container fail_message_container" style="background:#D84C29">
+		${fail_message }
+	</div>
+</c:if>
+
+<div class="message_container fail_message_container" style="background:#D84C29;display:none;top:10px">
+	<!--显示错误信息  -->		
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		setTimeout(function(){
+			$(".message_container").css("display","none");
+		}, 2000);
+	})
+</script>
+
+<% 
+	session.setAttribute("success_message", null);
+	session.setAttribute("fail_message", null);
+%>
 	
 		<div class="container">
 			<div class="navigation" >
@@ -33,7 +66,7 @@
 						<li>
 							<a class="header_nav" href="javascript:void(0)">授课管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=teacher_class") %>">授课信息</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/teacher_class") %>">授课信息</a></li>
 								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=add_teacher_class") %>">增加授课</a></li>
 								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itejydnmdw")%>">批量增加授课</a></li>
 							</ul>
@@ -71,7 +104,7 @@
 						<li>
 							<a class="header_nav" href="javascript:void(0)">设置时间  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemdrdcm")%>">设置评教时间</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/show_set_time")%>">设置评教时间</a></li>
 							</ul>
 						</li>
 						<li>

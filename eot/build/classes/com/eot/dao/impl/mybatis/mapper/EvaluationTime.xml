@@ -6,16 +6,16 @@
  	<resultMap type="EvaluationTime" id="EvaluationTimeMap">
         <result column="year" property="year"/>
         <result column="term" property="term"/>
-        <result column="start_date" property="startDate"/>
-        <result column="end_date" property="endDate"/>
+        <result column="start_date" property="startDate" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result column="end_date" property="endDate" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
     </resultMap>
 	
 	<insert id="addThisYearEvaluationTime" parameterType="EvaluationTime">
 		INSERT INTO evaluation_time(year, term, start_date, end_date)
-		VALUES(#{year}, #{term}, #{startDate}, #{endDate}) 
+		VALUES(#{year}, #{term}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}) 
 	</insert>
 	
-	<select id="getThisYearStartEndDate" resultType="EvaluationTimeMap" parameterType="map">
+	<select id="getThisYearStartEndDate" resultMap="EvaluationTimeMap" parameterType="map">
         <![CDATA[
             SELECT start_date, end_date
             FROM  evaluation_time

@@ -76,7 +76,9 @@
     <bean id="studentDao" class="com.eot.dao.impl.mybatis.StudentDaoImpl" parent="baseDao" />
 
     <bean id="categoryItemDao" class="com.eot.dao.impl.mybatis.CategoryItemDaoImpl" parent="baseDao" />
-     
+    
+    <bean id="evaluationTimeDao" class="com.eot.dao.impl.mybatis.EvaluationTimeDaoImpl" parent="baseDao" />
+    
     <bean id="teacherClassService" class="com.eot.service.impl.TeacherClassServiceImpl" scope="singleton" >
         <property name="teacherClassDao" ref="teacherClassDao" />
     </bean>
@@ -93,6 +95,10 @@
     
     <bean id="categoryItemService" class="com.eot.service.impl.CategoryItemServiceImpl" scope="singleton" >
         <property name="categoryItemDao" ref="categoryItemDao" />
+    </bean>
+	
+	 <bean id="evaluationTimeService" class="com.eot.service.impl.EvaluationTimeServiceImpl" scope="singleton" >
+        <property name="evaluationTimeDao" ref="evaluationTimeDao" />
     </bean>
 	
     <bean class="com.eot.util.SpringUtil"></bean>
