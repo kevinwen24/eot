@@ -45,10 +45,10 @@ public class EvaluationTimeDaoImpl extends SqlSessionDaoSupport implements IEval
 	}
 
 	@Override
-	public EvaluationTime getThisYearStartEndDate(String year1, int term1) {
+	public EvaluationTime getThisYearStartEndDate(String year, int term) {
 		/*Map<String, Object> params = new HashMap<>();
-		params.put("year", year1);
-		params.put("term", term1);
+		params.put("year", year);
+		params.put("term", term);
 		return getSqlSession().selectOne(CLASS_NAME + SQL_ID_GET_THIS_YEAR_START_END_DATE, params);
 		*/
 		Connection conn = DBUtil.getConnection();
@@ -59,8 +59,8 @@ public class EvaluationTimeDaoImpl extends SqlSessionDaoSupport implements IEval
 
 	        try {
 	            ps = conn.prepareStatement(sql);
-	            ps.setString(1, year1);
-	            ps.setInt(2, term1);
+	            ps.setString(1, year);
+	            ps.setInt(2, term);
 	            rs = ps.executeQuery();
 	            if (rs.next()) {
 	                evaluationTime.setStartDate(rs.getString("start_date"));

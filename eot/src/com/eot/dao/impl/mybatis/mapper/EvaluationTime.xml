@@ -15,9 +15,9 @@
            FROM    
            		evaluation_time
            WHERE
-           		year=#{year1}
+           		year=#{year}
            AND
-           		term=#{term1}
+           		term=#{term}
     </select>
     
     <insert id="addThisYearEvaluationTime" parameterType="EvaluationTime">

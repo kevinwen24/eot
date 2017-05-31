@@ -45,9 +45,9 @@ public class SchoolInfoDaoImpl extends SqlSessionDaoSupport implements ISchoolIn
 	public List<SchoolInfo> findAllClassByMajorNoAndGrade(int majorNo, String grade) {
 		// TODO Auto-generated method stub
 		Map<String, Object> params = new HashMap<>();
-		params.put("garde", grade);
+		params.put("grade", grade);
 		params.put("majorNo", majorNo);
-		return getSqlSession().selectList(CLASS_NAME + SQL_ID_findAllClassByMajorNoAndGrade);
+		return getSqlSession().selectList(CLASS_NAME + SQL_ID_findAllClassByMajorNoAndGrade, params);
 	}
 
 }

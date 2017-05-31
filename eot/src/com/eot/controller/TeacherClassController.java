@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -113,6 +114,52 @@ public class TeacherClassController extends BaseController{
 		modelAndView.addObject("majors", majors);
 		modelAndView.addObject("courses", courses);
 		modelAndView.addObject("forwardPage", "show_addteacher_class");
+		modelAndView.setViewName("index");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/add_teacher_class", method = {RequestMethod.POST})
+	
+	public ModelAndView addTeacherClass(
+										) {
+		
+		Pagination pagination = new Pagination(); 
+		
+		if(teacherNo != null && teacherNo > 0){
+			pagination.setTeacherNo(teacherNo);
+		}else{
+			
+			if(deptNo > 0 ){
+				pagination.setDeptNo(deptNo);
+			}
+			
+			if(year > 0){
+				pagination.setYear(year + "");
+			}
+			
+			if(term > 0){
+				pagination.setTerm(term - 1);
+			}
+		}
+		
+		if(pageSize != null && pageSize > 0) {
+			pagination.setPageSize(pageSize);
+		}
+		
+		if(currentPage != null && currentPage > 0) {
+			pagination.setCurrentPage(currentPage);
+		}
+		
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		List<TeacherClass> teacherClasss = iTeacherClassService.findAllTeacherClass(pagination);
+		List<SchoolInfo> depts = SchoolInfoService.findAlldept();
+		modelAndView.addObject("depts", depts);
+		modelAndView.addObject("pagination", pagination);
+		modelAndView.addObject("pageIndexs", PaginationUtil.getPageIndex(pagination));
+		modelAndView.addObject("teacherClasss", teacherClasss);
+		modelAndView.addObject("forwardPage", "teacher_class");
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}

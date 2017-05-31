@@ -28,8 +28,7 @@
 			<tr>
 				<td class="input_tip"><label>教师姓名</label></td>
 				<td class="input_content">
-					 <select class="form-control " >
-					 <option value="-1">选择教师姓名</option>
+					 <select class="form-control all_teacher_select" >
 					</select>
 				</td>
 			</tr>
@@ -58,7 +57,7 @@
 			<tr>
 				<td class="input_tip"><label>学生年级</label></td>
 				<td class="input_content">
-				 <select class="form-control " >
+				 <select class="form-control student_grade_select" >
 						<option>年级</option>
 						<option>2013</option>
 						<option>2014</option>
@@ -72,11 +71,6 @@
 				<td class="input_tip"><label>学生班级</label></td>
 				<td class="input_content">
 				 <select class="form-control all_select" multiple="multiple"  style="width:300px;float: left;height: 150px;">
-						<option class="all_select_option" value="2013">201</option>
-						<option class="all_select_option" value="2014">2014</option>
-						<option class="all_select_option" value="2015">2015</option>
-						<option class="all_select_option" value="2016">2016</option>
-						<option class="all_select_option" value="2017">2017</option>
 				</select>
 				<div class="controll_class" style="">
 					<span class="add_class">&gt;</span>
@@ -123,30 +117,72 @@
 		});	
 		
 	});
-	<%-- var deptNo = $(".teach_dept_select").val();
+	
+	
 	$(function(){
+		
 		$(".teach_dept_select").change(function(){
+			var deptNo = $(".teach_dept_select option:selected").val();
 			if(deptNo > 1){
 				$.ajax({
 		             type: "GET",
-		             url: "<%=managerPath%>all_teacher_deptNo"?deptNo,
-		             dataType: "json",
+		             url: "<%=managerPath%>all_teacher_deptNo?deptNo="+deptNo,
 		             contentType:"application/json",
 		             success: function(data){
-		            	 alert(data);
-	                         $('.teach_dept_select').empty(); 
+	                         $('.all_teacher_select').empty(); 
 	                         //清空resText里面的所有内容
 	                         var html = ''; 
 	                         $.each(data, function(commentIndex, comment){
-	                               html += '<div class="comment"><h6>' + comment['username']
-	                                         + ':</h6><p class="para"' + comment['content']
-	                                         + '</p></div>';
+	                               html += '<option value="'+comment["teacherNo"] + '">'+ comment["teacherName"] + '</option>';
 	                         });
-	                         $('.teach_dept_select').html('<option value="-1">选择教师姓名</option>' + html);
+	                         alert(html);
+	                         $('.all_teacher_select').append('<option value="-1">选择教师姓名</option>' + html);
 	                      }
-				}
+				})
 			}
-		}	  
-	})--%>	 
+		});
+		
+		$(".student_grade_select").change(function(){
+			var majorNo = $(".stu_major_select option:selected").val();
+			var grade = $(".student_grade_select option:selected").val();
+			if (majorNo > 0 && grade > 0){
+				$.ajax({
+		             type: "GET",
+		             url: "<%=managerPath%>all_class_major_grade?majorNo="+majorNo+"&grade="+grade,
+		             contentType:"application/json",
+		             success: function(data){
+	                         $('.all_select').empty(); 
+	                         //清空resText里面的所有内容
+	                         var html = ''; 
+	                         $.each(data, function(commentIndex, comment){
+	                               html += '<option value="'+comment["classNo"] + '">'+ comment["majorName"] + ' - '+comment["classIndex"] + '班' + '</option>';
+	                         });
+	                         $('.all_select').append(html);
+	                      }
+				})
+			}
+		});
+		
+		$(".stu_major_select").change(function(){
+			var majorNo = $(".stu_major_select option:selected").val();
+			var grade = $(".student_grade_select option:selected").val();
+			if (majorNo > 0 && grade > 0){
+				$.ajax({
+		             type: "GET",
+		             url: "<%=managerPath%>all_class_major_grade?majorNo="+majorNo+"&grade="+grade,
+		             contentType:"application/json",
+		             success: function(data){
+	                         $('.all_select').empty(); 
+	                         //清空resText里面的所有内容
+	                         var html = ''; 
+	                         $.each(data, function(commentIndex, comment){
+	                               html += '<option value="'+comment["classNo"] + '">'+ comment["majorName"] + ' - '+comment["classIndex"] + '班' + '</option>';
+	                         });
+	                         $('.all_select').append(html);
+	                      }
+				})
+			}
+		});
+	});
 </script>
 

@@ -12,6 +12,8 @@
         <result column="class_index" property="classIndex"/>
         <result column="course_no" property="courseNo"/>
         <result column="course_name" property="courseName"/>
+        <result column="teacher_no" property="teacherNo"/>
+        <result column="teacher_name" property="teacherName"/>
     </resultMap>
 	
 	
@@ -47,17 +49,14 @@
     </select>
     
     <select id="findAllClassByMajorNoAndGrade" resultMap="SchoolInfoMap" parameterType="map">
-	 	<![CDATA[
 			SELECT class.class_no,class.class_index,major.`name` major_name
 			from class,major
 			WHERE 
 				class.major_no=major.major_no
 			AND
-				class.grade = #{grade}
+				major.major_no=#{majorNo}
 			AND
-				major.major_no = #{majorNo}
-
-        ]]>
+				class.grade=#{grade}
 	</select>
 	
 	<select id="findAllCourse" resultMap="SchoolInfoMap">

@@ -11,6 +11,9 @@ public class SchoolInfo {
 	private Integer courseNo;
 	private String courseName;
 	
+	private Integer teacherNo;
+	private String teacherName;
+	
 	public Integer getDeptNo() {
 		return deptNo;
 	}
@@ -75,5 +78,20 @@ public class SchoolInfo {
 		this.courseName = courseName;
 	}
 
+	public Integer getTeacherNo() {
+		return teacherNo;
+	}
+
+	public void setTeacherNo(Integer teacherNo) {
+		this.teacherNo = teacherNo;
+	}
+
+	public String getTeacherName() {
+		return teacherName;
+	}
+
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
+	}
 	
 }
