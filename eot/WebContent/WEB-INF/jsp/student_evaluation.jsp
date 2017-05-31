@@ -7,6 +7,8 @@
 
 <% 
 		List<Evaluation> evaluationClasss = (List<Evaluation>)request.getAttribute("evaluationClasss");
+		EvaluationTime evaluationTime = (EvaluationTime)request.getAttribute("evaluationTime");
+		String timeMsg = (String)request.getAttribute("timeMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -60,5 +62,14 @@
 			$(".count_info").text("暂时没有可评教的信息");
 			$(".evaluation_container").css("display","none");
 		}
+		<%
+			if(timeMsg != null){
+		%>
+			$(".content").html("<div style='padding-left:200px;padding-top:100px;'><h3><%=timeMsg%></h3><h4 style='padding:20px'>开始时间: <%=evaluationTime.getStartDate() %></h4><h4 style='padding-left:20px'>结束时间: <%=evaluationTime.getEndDate() %></h4></div>");
+		<%
+			}
+		%>
 	</script>
+	
+	
 </html>

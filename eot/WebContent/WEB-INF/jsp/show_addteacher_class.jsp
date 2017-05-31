@@ -71,8 +71,8 @@
 			<tr>
 				<td class="input_tip"><label>学生班级</label></td>
 				<td class="input_content">
-				 <select class="form-control " multiple="multiple" class="all_select" style="width:300px;float: left;height: 150px;">
-						<option class="all_select_option" value="2013">2013</option>
+				 <select class="form-control all_select" multiple="multiple"  style="width:300px;float: left;height: 150px;">
+						<option class="all_select_option" value="2013">201</option>
 						<option class="all_select_option" value="2014">2014</option>
 						<option class="all_select_option" value="2015">2015</option>
 						<option class="all_select_option" value="2016">2016</option>
@@ -81,16 +81,8 @@
 				<div class="controll_class" style="">
 					<span class="add_class">&gt;</span>
 					<span class="remove_class">&lt;</span>
-					<span class="add_all_class" style="margin-top:20px;background: #1C84C6;">&gt;&gt;</span>
-					<span class="remove_all_class" style="background: #1C84C6;">&lt;&lt;</span>
 				</div>
-			    <select class="form-control " multiple="multiple" class="commit_select" style="width:300px;float: left;	height: 150px;">
-						<option>年级</option>
-						<option>2013</option>
-						<option>2014</option>
-						<option>2015</option>
-						<option>2016</option>
-						<option>2017</option>
+			    <select class="form-control commit_select" multiple="multiple" style="width:300px;float: left;	height: 150px;">
 				</select>
 				</td>
 			</tr>
@@ -102,44 +94,36 @@
 
 <script type="text/javascript">
 	$(function(){
-		var allSelectOption = $(".all_select_option");
-		var	commitSelct = $(".commit_select");
+		var	commitSelect = $(".commit_select");
 		var addClass = $(".add_class");
 		var removeClass = $(".remove_class");
-		var addAllClass = $(".add_all_class");
-		var removeAllClass = $(".remove_all_class");
 		
 		addClass.click(function(){
-			console.log("add");
+			var value = $(".all_select option:selected").val();
+			var content = $(".all_select option:selected").text();
+			$(".all_select option:selected").remove();
 			
-			var text = $(".all_select option:selected").val();
-			var value = $(".all_select option:selected").attr("value");
-			console.log("text"+text);
-			console.log("value"+value);
-			if (text != undefined && value != undefined) {
-				console.log("can add");
+			var hasOption = false;
+			$(".commit_select option").each(function (){
+			    if($(this).text()==content){   
+			    	hasOption = true;
+				 }
+			 });  
+			
+			if(!hasOption){
+				$(commitSelect).append("<option value='"+value+"'>"+content+"</option>");
 			}
-			/* for(var i = 0; i < allSelectOption.length; i++){
-				 
-				if($(allSelectOption[i]).attr("selected")) {
-					console.log(1);
-				}
-			} */
 		});
 		
 		removeClass.click(function(){
-			
+			$(".commit_select option:selected").remove();
+			var value = $(".commit_select option:selected").val();
+			var content = $(".commit_select option:selected").text();
+			$(".all_select").append("<option value='"+value+"'>"+content+"</option>");
 		});	
 		
-		addAllClass.click(function(){
-			
-		});
-		
-		removeAllClass.click(function(){
-			
-		});
 	});
-	var deptNo = $(".teach_dept_select").val();
+	<%-- var deptNo = $(".teach_dept_select").val();
 	$(function(){
 		$(".teach_dept_select").change(function(){
 			if(deptNo > 1){
@@ -162,7 +146,7 @@
 	                      }
 				}
 			}
-		}		  
-	})
+		}	  
+	})--%>	 
 </script>
 

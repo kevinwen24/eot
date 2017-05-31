@@ -9,45 +9,57 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.eot.model.User;
-import com.eot.util.PathUtil;
 
 /**
- * Servlet Filter implementation class SessionFilter
+ * Servlet Filter implementation class RoleFilter
  */
-public class SessionFilter implements Filter {
+public class RoleFilter implements Filter {
 
-    public SessionFilter() {
+    /**
+     * Default constructor. 
+     */
+    public RoleFilter() {
         // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see Filter#destroy()
+	 */
 	public void destroy() {
-		
+		// TODO Auto-generated method stub
 	}
 
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest)request;
-		PathUtil.setContextPath(req.getContextPath());
 		HttpServletResponse resp = (HttpServletResponse)response;
+		HttpSession session = req.getSession();
+		User user = (User)session.getAttribute("user");
 		
-		User user = (User)req.getSession().getAttribute("user");
-		String requestionUri = req.getRequestURI().substring(req.getContextPath().length()+1);
-		if(requestionUri.endsWith("login") || requestionUri.endsWith("save_login")){
-			chain.doFilter(req, resp);
-		} else if(user == null){
-			resp.sendRedirect( req.getContextPath() +  "/page/login");
-		} else {		
-			chain.doFilter(req, resp);
+		if(user != null){
+			if(user.getRoleId() == 3){
+				session.setAttribute("fail_message", "权限不足！");		
+				if(user.getRoleId() == 3){
+					resp.sendRedirect(req.getContextPath() + "/page/student/show");
+				}
+			}  else if (user.getRoleId() == 2){
+				
+			} else {
+				chain.doFilter(req, resp);
+			}
 		}
-		
 	}
 
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		
+		// TODO Auto-generated method stub
 	}
 
 }

@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.eot.util.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="com.eot.model.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%
 	String managerPath = PathUtil.getFullPath("manager/");
+	List<SchoolInfo> depts = (List<SchoolInfo>)request.getAttribute("depts");
+	Pagination pagination = (Pagination)request.getAttribute("pagination");
 %>
 
 <div id="content">
@@ -13,14 +17,16 @@
 		<form class="form-inline school_form" action="<%=managerPath %>teacher_class" method="post" >
 			<input type="hidden" value="${pagination.currentPage }" id="currentPage" name="currentPage">
 			<input type="hidden" value="${pagination.pageSize }" id="pageSize" name="pageSize"> 
-			<input type="hidden" value="${pagination.term }" id="term"> 
-			<input type="hidden" value="${pagination.year }" id="year"> 
+			<input type="hidden" value="${pagination.term }" id="term" > 
+			<input type="hidden" value="${pagination.year }" id="year" > 
+			<input type="hidden" value="${pagination.deptNo }" id="deptNo" > 
+			<input type="hidden" value="${pagination.teacherNo }" id="teacherNo" name="teacherNo"> 
 			<div class="form-group">
 			    <select class="form-control select_dept" name="deptNo">
-						<option value="-1">教师所属学院</option>
-						<option value="12">jdbsfk</option>
-						<option value="23">软件工程</option>
-						<option value="202">jdbsfk</option>
+					<option value="-1">选择教师学院</option>
+						<%for(int i =0; i < depts.size();i++){ %>
+							<option value="<%=depts.get(i).getDeptNo()%>"><%=depts.get(i).getDeptName() %></option>
+						<% }%>
 				</select>
 	  		</div>
 			<div class="form-group">
@@ -89,26 +95,26 @@
 		<nav aria-label="Page navigation">
 		  <ul class="pagination">
 		    <li>
-		      <a href="#" aria-label="Previous">
+		      <a href="javascript:void(0)" aria-label="Previous" class="skip_first_page">
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
 		    <c:forEach var="pageIndex" items="${pageIndexs }">
 		    	<li class="pageIndex">
-		    			<c:choose>
-		    				<c:when test="${pageIndex != -1}">
-			    				<a href="javascript:void(0)" >
-			    					<c:out value="${pageIndex }"/>
-			    				</a>
-		    				</c:when>
-		    				<c:when test="${pageIndex == -1}">
-			    				<span>...</span>
-		    				</c:when>
-		    			</c:choose>
-		    	</li>
+	    			<c:choose>
+	    				<c:when test="${pageIndex != -1}">
+		    				<a  class="page_index_a" href="javascript:void(0)">
+		    					<c:out value="${pageIndex }"/>
+		    				</a>
+	    				</c:when>
+	    				<c:when test="${pageIndex == -1}">
+		    				<span>...</span>
+	    				</c:when>
+	    			</c:choose>
+	    		</li>
 		    </c:forEach>
 		    <li>
-		      <a href="#" aria-label="Next">
+		      <a href="javascript:void(0)" aria-label="Next" class="skip_last_page">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>
@@ -128,7 +134,11 @@
 		}
 		
 		$(".search_by_teacher_sub").click(function(){
-			if($(".search_student_no").val() == "" || isNaN($(".search_student_no").val())){
+			if($(".search_student_no").val() == ""){
+				window.location.href="<%=managerPath%>teacher_class";
+			}
+			
+			if(isNaN($(".search_student_no").val())){
 				show_fail_message("输入不合法!");
 			} else {
 				$(".teacher_class_form").submit();
@@ -139,12 +149,26 @@
 		   var childs = $(".select_term").children();
 			
 			for(var i = 0;i <childs.length; i++ ){
-				if($(childs[i]).attr("value") == $("#term").val().trim() - 0 + 1){
-					$(childs[i]).attr("selected","true");
-					break;
+				if ($("#term").val().trim() != ""){
+					if($(childs[i]).attr("value") == $("#term").val().trim() - 0 + 1){
+						$(childs[i]).attr("selected","true");
+						break;
+					}
 				}
 			}
 		}
+		
+		if($("#deptNo").val() >= 0){
+			   var childs = $(".select_dept").children();
+				
+				for(var i = 0;i <childs.length; i++ ){
+					if($(childs[i]).attr("value") == $("#deptNo").val().trim()){
+						$(childs[i]).attr("selected","true");
+						break;
+					}
+				}
+			}
+			
 		
 		if($("#year").val() >= 0){
 			   var childs = $(".select_year").children();
@@ -157,17 +181,48 @@
 				}
 		}
 		
-		var paglis = $("ul.pagination").children("li.pageIndex");
-		for(var i = 0;i < paglis.length; i++ ){
-			$(paglis[i]).find("a").click(function(){
-				console.log($(paglis[i]).text().trim());
-				console.log($(paglis[i]).text().trim());
-				if($(paglis[i]).text().trim() > 0){
-					$("#currentPage").val($(paglis[i]).text().trim());
-					$(".school_form").submit();
+		/* $(".pagination").on("click", function(){
+			alert($(this).index());
+			alert($(this).find("span").text().replace(/[^0-9]/ig, "")+"");
+		});
+		 */
+		 
+		var pageIndexs = $(".page_index_a");
+		for(var i = 0; i < pageIndexs.length;i++  )
+			$(pageIndexs[i]).click(function(){
+			if($(this).text().trim() > 0){
+				$("#currentPage").val($(this).text().trim());
+				$(".school_form").submit();
+			}
+		}); 
+		
+		$(".skip_first_page").click(function(){
+			<%if(!PaginationUtil.isFirstPage(pagination)){
+			%>
+				$("#currentPage").val($("#currentPage").val() - 1 );
+				$(".school_form").submit();
+			<%
+				} else {
+			%>
+				$(this).parent().addClass("disabled");
+			<%
 				}
-			});
-		}
+			%>
+		});	
+		
+		$(".skip_last_page").click(function(){
+			<%if(!PaginationUtil.isLastPage(pagination)){
+			%>
+				$("#currentPage").val($("#currentPage").val() - 0 + 1 );
+				$(".school_form").submit();
+			<%
+				} else {
+			%>
+				$(this).parent().addClass("disabled");
+			<%
+				}
+			%>
+		});	
 	});
 </script>
 

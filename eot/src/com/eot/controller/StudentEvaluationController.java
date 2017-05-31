@@ -1,7 +1,10 @@
 package com.eot.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eot.common.Constants;
 import com.eot.model.Evaluation;
+import com.eot.model.EvaluationTime;
 import com.eot.model.User;
 import com.eot.service.IEvaluationService;
-import com.eot.util.PathUtil;
+import com.eot.service.IEvaluationTimeService;
+import com.eot.util.DateUtil;
 import com.eot.util.ScoreUtil;
 
 @Controller
@@ -30,10 +35,35 @@ public class StudentEvaluationController extends BaseController{
 
 	@Autowired
 	private IEvaluationService evaluationService;
+	@Autowired
+	public IEvaluationTimeService evaluationTimeService;
 	
 	@RequestMapping("/show")
 	public ModelAndView showNeedEvaluation() {
 		ModelAndView modelAndView = new ModelAndView();
+		Date currentDate = new Date();
+		EvaluationTime evaluationTimeJudge = evaluationTimeService.getThisYearStartEndDate(DateUtil.getYear(currentDate), DateUtil.getTerm(currentDate));
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		modelAndView.addObject("evaluationTime", evaluationTimeJudge);
+		
+		if(evaluationTimeJudge!=null){
+			try {
+				Date startDate =simpleDateFormat.parse(evaluationTimeJudge.getStartDate()) ;
+				Date endDate = simpleDateFormat.parse(evaluationTimeJudge.getEndDate());
+				
+				if(currentDate.getTime() < startDate.getTime()){
+					modelAndView.addObject("timeMsg", "评教时间没有开始!");
+					modelAndView.setViewName("student_evaluation");
+					
+				} else if(currentDate.getTime() > endDate.getTime()){
+					modelAndView.addObject("timeMsg", "评教时间已经结束!");
+					modelAndView.setViewName("student_evaluation");
+				}
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		List<Evaluation> evaluationClasss = evaluationService.getStudentAllNeedEvaluatonClass(13270132);
 		modelAndView.addObject("evaluationClasss", evaluationClasss);
 		modelAndView.setViewName("student_evaluation");

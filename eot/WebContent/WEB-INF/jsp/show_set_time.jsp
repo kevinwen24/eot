@@ -26,13 +26,13 @@
 		<tr style="height:100px;line-height:100px;">
 			<td style="width:100px;font-weight: bold;">评教开始时间</td>
 			<td style="width:300px;">
-				 <input type="text" id="start_datetimepicker" class="form-control">
+				 <input type="text" id="start_datetimepicker" class="form-control" name="startDate" value="${evaluationTime.startDate }">
 			</td>
 		</tr>
 		<tr style="height:100px;line-height:100px;">
 			<td style="width:100px;font-weight: bold;">评教结束时间</td>
 			<td>
-				<input type="text" id="end_datetimepicker" class="form-control">
+				<input type="text" id="end_datetimepicker" class="form-control" name="endDate" value="${evaluationTime.endDate }">
 			</td>
 		</tr>
 		<tr style="margin-top:20px;height:100px;line-height:100px;">

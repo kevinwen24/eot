@@ -47,7 +47,7 @@ public class PaginationUtil {
 		return new int[]{1};
 	}
 	
-	 public boolean isFirstPage(Pagination pagination) {
+	 public static boolean isFirstPage(Pagination pagination) {
 	        if(pagination.getCurrentPage() <= 1){
 	            return true;
 	        }
@@ -55,7 +55,7 @@ public class PaginationUtil {
 	        return false;
 	 }
 
-	 public boolean isLastPage(Pagination pagination) {
+	 public static boolean isLastPage(Pagination pagination) {
 	        if(pagination.getCurrentPage() >= pagination.getPageCount()){
 	            return true;
 	        }

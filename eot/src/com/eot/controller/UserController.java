@@ -14,7 +14,6 @@ import com.eot.common.Constants;
 import com.eot.model.User;
 import com.eot.service.IUserService;
 import com.eot.util.GetterUtil;
-import com.sun.javafx.image.impl.ByteIndexed.Getter;
 
 @Controller
 @RequestMapping(Constants.APP_URL_USER_PREFIX)
@@ -93,4 +92,11 @@ public class UserController extends BaseController{
 		return modelAndView;
 	}
 	
+	@RequestMapping("/logout")
+	public String logout(
+			HttpSession session
+							){
+		session.setAttribute("user", null);
+		return "login";
+	}
 }

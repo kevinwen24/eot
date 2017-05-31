@@ -1,14 +1,12 @@
 package com.eot.model;
 
-import java.sql.Timestamp;
-
 public class EvaluationTime {
 
 	private String year;
 	private int term;
 
-	private Timestamp startDate;
-	private Timestamp endDate;
+	private String startDate;
+	private String endDate;
 
 	public String getYear() {
 		return year;
@@ -26,20 +24,19 @@ public class EvaluationTime {
 		this.term = term;
 	}
 
-	public Timestamp getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Timestamp endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-
 }

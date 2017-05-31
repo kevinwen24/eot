@@ -50,7 +50,7 @@
             		</if>
             	</otherwise>
             </choose>
-            ORDER BY create_time desc,class_no asc
+            ORDER BY evaluation_no desc
             LIMIT #{offset},#{pageSize}
     </select>
 

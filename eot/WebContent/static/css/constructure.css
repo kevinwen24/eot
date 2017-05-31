@@ -18,11 +18,12 @@
 }
 
 .content {
-	width: 84%;
+	width: 85%;
 	height: 100%;
 	position: absolute;
 	top: 0;
 	left: 15%;
+	z-index: 10;
 }
 
 .content .header {

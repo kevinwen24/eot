@@ -17,6 +17,8 @@ public class TeacherClass {
 	private String courseName;
 	private String year;
 
+	private int isActive;
+	
 	public int getTeacherNo() {
 		return teacherNo;
 	}
@@ -128,5 +130,14 @@ public class TeacherClass {
 	public void setEvaluationNo(Integer evaluationNo) {
 		this.evaluationNo = evaluationNo;
 	}
+
+	public int getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(int isActive) {
+		this.isActive = isActive;
+	}
+	
 	
 }

@@ -5,8 +5,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.eot.model.*" %>
 <% 
-List<Map<String, List<Evaluation>>> lists = (List<Map<String, List<Evaluation>>>)request.getAttribute("lists");
-
+	List<Map<String, List<Evaluation>>> lists = (List<Map<String, List<Evaluation>>>)request.getAttribute("lists");
+	int itemNum = 0;
 %>
 
 <!DOCTYPE html>
@@ -42,7 +42,10 @@ List<Map<String, List<Evaluation>>> lists = (List<Map<String, List<Evaluation>>>
 		<div class="item_content">
 			<form action="<%=PathUtil.getFullPath("student/save") %>" method="post" id="form">
 				<input type="hidden" value="${evaluationNo }" name="evaluationNo"/>
-				<p class="evaluation_information">思想品得 &gt;</p>
+				<p class="evaluation_information">
+					评教须知：
+					评教分为5个等级，A、B、C、D、E，每位参评同学都应本着客观、公正的态度，须由本人对自己的任课教师的教学情况做出评价，不得由他人代评。
+				</p>
 				<%
 					for(Map<String, List<Evaluation>> limap : lists){
 						for(Map.Entry<String, List<Evaluation>> m : limap.entrySet()){
@@ -61,6 +64,7 @@ List<Map<String, List<Evaluation>>> lists = (List<Map<String, List<Evaluation>>>
 							</ul>
 							<%
 								List<Evaluation> evaluatios = m.getValue();
+								itemNum = evaluatios.size();
 								for(int i = 0; i < evaluatios.size(); i++) {
 							%>
 							<ul class="item">
@@ -85,7 +89,9 @@ List<Map<String, List<Evaluation>>> lists = (List<Map<String, List<Evaluation>>>
 						}
 					}
 				%>
-				<input type="button" class="btn btn-primary submit" value="提交" style="margin-right:90px;float:right;margin-top:30px;width:80px;">
+				<% if (itemNum > 0) {%>
+					<input type="button" class="btn btn-primary submit" value="提交" style="margin-right:90px;float:right;margin-top:30px;width:80px;">
+				<% }%>
 				</form>
 		</div>
 	</body>

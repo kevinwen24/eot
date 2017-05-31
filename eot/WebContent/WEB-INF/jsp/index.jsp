@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.eot.util.*" %>
+<%@ page import="com.eot.model.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <!DOCTYPE html>
@@ -52,13 +53,14 @@
 <% 
 	session.setAttribute("success_message", null);
 	session.setAttribute("fail_message", null);
+	User user = (User)session.getAttribute("user");
 %>
 	
 		<div class="container">
 			<div class="navigation" >
 				<div class="person_info">
 					<img src="<%=PropertyUtil.getStaticUrl() %>images/2015113173643639.png" alt="兰州理工大学" width="200">
-					<p class="">工号:000001</p>
+					<p class="">工号:<%=user.getUserId() %></p>
 					<p class="">管理员 <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span></p>
 				</div>
 				<div class="nav_container" >
@@ -68,23 +70,6 @@
 							<ul class="second_container">
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/teacher_class") %>">授课信息</a></li>
 								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/show_addteacher_class") %>">增加授课</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itejydnmdw")%>">批量增加授课</a></li>
-							</ul>
-						</li>
-						<li>
-							<a class="header_nav" href="javascript:void(0)">学生管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_ityteemx")%>" target="student_iframe">学生管理</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemyitixsax")%>">增加学生</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemxitisa")%>">批量增加学生</a></li>
-							</ul>
-						</li>
-						<li>
-							<a class="header_nav" href="javascript:void(0)">老师管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemiytin")%>">学生管理</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemfjt")%>">增加学生</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemtuas")%>">批量增加学生</a></li>
 							</ul>
 						</li>
 						<li>
@@ -114,26 +99,32 @@
 								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemnerm")%>">统计图</a></li>
 							</ul>
 						</li>
+						<li>
+							<a class="header_nav" href="javascript:void(0)">学生管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<ul class="second_container">
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_ityteemx")%>" target="student_iframe">学生管理</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemyitixsax")%>">增加学生</a></li>
+								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemxitisa")%>">批量增加学生</a></li>
+							</ul>
+						</li>
+						<li>
+							<a class="header_nav" href="javascript:void(0)">老师管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<ul class="second_container">
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemiytin")%>">学生管理</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemfjt")%>">增加学生</a></li>
+								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemtuas")%>">批量增加学生</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="content">
 				<div class="header">
-					<div class="logo">
-					</div>
-					<div class="user_info">
-						  <div class="btn-group">
-						    <a class="btn btn-info dropdown-toggle  my_info_btn" data-toggle="dropdown" href="#">
-						       我的
-						    <span class="caret"></span>
-						    </a>
-						   <ul class="dropdown-menu my_info_dropdown_me<br />nu" role="menu"  aria-labelledby="dLabel">
-						    <li><a tabindex="-1" href="#">Action</a></li>
-						    <li><a tabindex="-1" href="#">Another action</a></li>
-						    <li><a tabindex="-1" href="#">我的信息</a></li>
-						    <li class="divider"></li>
-						    <li><a tabindex="-1" href="#">退出</a></li>
-						  </ul>
+					 <div class="info">
+				 		<span>欢迎管理员:</span>
+						<span class="admin"><%=user.getName() %></span>
+						<div class="system_btn">
+							<a href="<%=PathUtil.getFullPath("logout")%>">注销</a>
 						</div>
 					</div>
 				</div>
@@ -144,7 +135,7 @@
 						<jsp:include page="${forwardPage }.jsp"></jsp:include>
 					</c:when>
 					<c:otherwise>
-						<jsp:include page="teacher_class.jsp"></jsp:include>
+						<jsp:include page="view_category.jsp"></jsp:include>
 					</c:otherwise>
 				</c:choose>
 					<!-- <iframe class="J_iframe" name="student_iframe" width="100%" height="100%" src="/eot/WEB-INF/jsp/student_manager.jsp" frameborder="0" data-id="index_v1.html"></iframe> -->
@@ -181,7 +172,6 @@
 					break;
 				}
 			}
-			
 		});
 	</script>
 </html>

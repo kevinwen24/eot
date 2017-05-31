@@ -1,4 +1,5 @@
-package com.eot.controller;
+
+ package com.eot.controller;
 
 import java.util.List;
 
@@ -60,13 +61,15 @@ public class TeacherClassController extends BaseController{
 		}
 		
 		if(currentPage != null && currentPage > 0) {
-			pagination.setPageSize(currentPage);
+			pagination.setCurrentPage(currentPage);
 		}
 		
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		List<TeacherClass> teacherClasss = iTeacherClassService.findAllTeacherClass(pagination);
+		List<SchoolInfo> depts = SchoolInfoService.findAlldept();
+		modelAndView.addObject("depts", depts);
 		modelAndView.addObject("pagination", pagination);
 		modelAndView.addObject("pageIndexs", PaginationUtil.getPageIndex(pagination));
 		modelAndView.addObject("teacherClasss", teacherClasss);

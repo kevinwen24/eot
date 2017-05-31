@@ -46,8 +46,10 @@
 	border:1px solid #ccc;
 	border-radius:5px;
 	margin-left: 40px;
-	height: 150px;
+	height: 80px;
 	background: #fff;
+	margin-top: 30px;
+	padding-top:7px;
 }
 
 .add_teacher_class_content table tr .input_content .controll_class span {

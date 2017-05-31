@@ -4,7 +4,6 @@
   <welcome-file-list>
     <welcome-file>static/welcome.html</welcome-file>
   </welcome-file-list>
-  
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath*:applicationContext.xml</param-value>
@@ -14,14 +13,24 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   
-   <filter>
+  <filter>
     <display-name>SessionFilter</display-name>
     <filter-name>SessionFilter</filter-name>
     <filter-class>com.eot.filter.SessionFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>SessionFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/page/*</url-pattern>
+  </filter-mapping>
+  
+   <filter>
+    <display-name>RoleFilter</display-name>
+    <filter-name>RoleFilter</filter-name>
+    <filter-class>com.eot.filter.RoleFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>RoleFilter</filter-name>
+    <url-pattern>/page/manager/*</url-pattern>
   </filter-mapping>
   
   <filter>
@@ -32,12 +41,11 @@
       <param-value>utf-8</param-value>
     </init-param>
   </filter>
+  
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  
-  
   <servlet>
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

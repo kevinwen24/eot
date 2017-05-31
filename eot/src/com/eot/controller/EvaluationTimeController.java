@@ -29,7 +29,7 @@ public class EvaluationTimeController {
 		ModelAndView modelAndView = new ModelAndView();
 		Date date = new Date();
 		EvaluationTime evaluationTime = evaluationTimeService.getThisYearStartEndDate(DateUtil.getYear(date), DateUtil.getTerm(date));
-		modelAndView.addObject("categoryItems", evaluationTime);
+		modelAndView.addObject("evaluationTime", evaluationTime);
 		modelAndView.addObject("forwardPage", "show_set_time");
 		modelAndView.setViewName("index");
 		return modelAndView;
@@ -37,18 +37,27 @@ public class EvaluationTimeController {
 	
 	@RequestMapping(value = "/set_time", method = {RequestMethod.POST})
 	public ModelAndView setTime(
-			@RequestParam (value="startDate") Date startDate,
-			@RequestParam (value="endDate") Date endDate,
+			@RequestParam (value="startDate") String startDate,
+			@RequestParam (value="endDate") String endDate,
 			HttpSession session
 			) {
 		ModelAndView modelAndView = new ModelAndView("redirect:/page/manager/show_set_time");
 		Date date = new Date();
+		EvaluationTime evaluationTimeJudge = evaluationTimeService.getThisYearStartEndDate(DateUtil.getYear(date), DateUtil.getTerm(date));
+		
 		EvaluationTime evaluationTime = new EvaluationTime();
 		evaluationTime.setYear(DateUtil.getYear(date));
 		evaluationTime.setTerm(DateUtil.getTerm(date));
+		evaluationTime.setStartDate(startDate.trim().replace("/", "-"));
+		evaluationTime.setEndDate(endDate.trim().replace("/", "-"));
+		
 		try{
-			evaluationTimeService.addThisYearEvaluationTime(evaluationTime);
-			session.setAttribute("fail_message", "设置时间成功!");
+			if(evaluationTimeJudge.getStartDate() != null){
+				evaluationTimeService.updaterStartEndDate(evaluationTime);
+			}else{
+				evaluationTimeService.addThisYearEvaluationTime(evaluationTime);
+			}
+			session.setAttribute("success_message", "设置时间成功!");
 		}catch(Exception e){
 			session.setAttribute("fail_message", "设置时间成功失败!");
 			e.printStackTrace();

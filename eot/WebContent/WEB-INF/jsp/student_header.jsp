@@ -1,20 +1,25 @@
 <%@ page import="com.eot.util.*" %>
+<%@ page import="com.eot.model.*" %>
 <%@ page contentType="text/html; charset=utf-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%
+	User user = (User)session.getAttribute("user");
+%>
 
 <div class="header_container">
 	<img src="<%=PropertyUtil.getStaticUrl() %>images/2015113173643639.png" alt="兰州理工大学" width="200" height="70">
 	<div class="info">
 		<div class="user_info">
 			<span>学号:</span>
-			<span>13270132</span>
+			<span><%=user.getUserId() %></span>
 			<span style="margin-left: 30px;">姓名:</span>
-			<span>文震杰</span>
+			<span><%=user.getName() %></span>
 			<span class="glyphicon glyphicon-pencil" style="margin-left: 18px;cursor: pointer;"
 				data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></span>
 		</div>
 		<div class="system_btn">
-			<span class="exit_system" >注销</span>		
+			<span class="exit_system" ><a href="<%=PathUtil.getFullPath("logout")%>">注销</a></span>		
 		</div>
 	</div>
 </div>

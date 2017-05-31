@@ -6,31 +6,30 @@
  	<resultMap type="EvaluationTime" id="EvaluationTimeMap">
         <result column="year" property="year"/>
         <result column="term" property="term"/>
-        <result column="start_date" property="startDate" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
-        <result column="end_date" property="endDate" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
+        <result column="start_date" property="startDate" />
+        <result column="end_date" property="endDate" />
     </resultMap>
 	
-	<insert id="addThisYearEvaluationTime" parameterType="EvaluationTime">
-		INSERT INTO evaluation_time(year, term, start_date, end_date)
-		VALUES(#{year}, #{term}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}) 
-	</insert>
-	
 	<select id="getThisYearStartEndDate" resultMap="EvaluationTimeMap" parameterType="map">
-        <![CDATA[
-            SELECT start_date, end_date
-            FROM  evaluation_time
-            WHERE 
-           		year = #{year}
-           	AND
-           		term = #{term}
-        ]]>
+           SELECT start_date, end_date
+           FROM    
+           		evaluation_time
+           WHERE
+           		year=#{year1}
+           AND
+           		term=#{term1}
     </select>
+    
+    <insert id="addThisYearEvaluationTime" parameterType="EvaluationTime">
+		INSERT INTO evaluation_time(year, term, start_date, end_date)
+		VALUES(#{year}, #{term}, #{startDate}, #{endDate}) 
+	</insert>
     
     <update id="updaterStartEndDate" parameterType="EvaluationTime">
     	UPDATE evaluation_time
     	SET 
     		start_date = #{startDate}
-    	AND
+    	,
     		end_date = #{endDate}
     	WHERE 
            	year = #{year}

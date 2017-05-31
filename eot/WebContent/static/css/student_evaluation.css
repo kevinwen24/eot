@@ -53,8 +53,8 @@
 	cursor: pointer;
 }
 
-.header_container .info .system_btn span {
-	cursor: pointer;
+.header_container .info .system_btn span a{
+	color:#fff;
 }
 
 .content {
