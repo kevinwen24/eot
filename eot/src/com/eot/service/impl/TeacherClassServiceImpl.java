@@ -44,5 +44,11 @@ public class TeacherClassServiceImpl implements ITeacherClassService{
 		
 		return 0;
 	}
+
+	@Override
+	public int addTeacherClass(int teacherNo, int courseNo, int classNo) {
+		// TODO Auto-generated method stub
+		return iTeacherClassDao.addTeacherClass(teacherNo, courseNo, classNo);
+	}
 	
 }

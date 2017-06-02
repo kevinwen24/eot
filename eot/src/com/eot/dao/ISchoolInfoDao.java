@@ -16,4 +16,5 @@ public interface ISchoolInfoDao {
 	
 	public List<SchoolInfo> findAllClassByMajorNoAndGrade(int majorNo, String grade);
     
+	public void addCourse(String courseName, Integer courseScore);
 }

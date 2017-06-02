@@ -1,5 +1,6 @@
 package com.eot.dao.impl.mybatis;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.eot.dao.ITeacherClassDao;
 import com.eot.model.TeacherClass;
+import com.eot.util.DateUtil;
 import com.eot.util.Pagination;
 
 public class TeacherClassDaoImpl extends SqlSessionDaoSupport implements ITeacherClassDao{
@@ -16,6 +18,7 @@ public class TeacherClassDaoImpl extends SqlSessionDaoSupport implements ITeache
 	private static final String SQL_ID_GET_TOTAL_COUNT = ".getTotalCount";
 	private static final String SQL_ID_FIND_All_TEACHERCLASS = ".findAllTeacherClass";
 	private static final String SQL_ID_GET_TEACHERCLASS_BY_TEACHERNO = ".getTeacherClassByTeacherNo";
+	private static final String SQL_ID_addTeacherClass = ".addTeacherClass";
 	
 	@Override
 	public void addTeacherClass(TeacherClass teacherClass) {
@@ -62,6 +65,18 @@ public class TeacherClassDaoImpl extends SqlSessionDaoSupport implements ITeache
 	public int deleteTeacherClass(int[] ids) {
 		
 		return 0;
+	}
+
+	@Override
+	public int addTeacherClass(int teacherNo, int courseNo, int classNo) {
+		TeacherClass teacherClass = new TeacherClass();
+		teacherClass.setClassNo(classNo);
+		teacherClass.setCourseNo(courseNo);
+		teacherClass.setTeacherNo(teacherNo);
+		teacherClass.setYear(DateUtil.getYear(new Date()));
+		teacherClass.setTerm(DateUtil.getTerm(new Date()));
+		getSqlSession().insert(CLASS_NAME + SQL_ID_addTeacherClass, teacherClass);
+		return teacherClass.getEvaluationNo();
 	}
 
 	

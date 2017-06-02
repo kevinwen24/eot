@@ -64,9 +64,9 @@
 			<li class="data_line">
 				<ul class="data_line_container stu_header_ul">
 					<li class="stu_index stu_header" style="margin-left:20px;">序号</li>
-					<li class="stu_no stu_header">所属学院</li>
+					<li class="stu_no stu_header">教师所属学院</li>
 					<li class="stu_name stu_header">职工编号</li>
-					<li class="stu_gender stu_header">姓名</li>
+					<li class="stu_gender stu_header">教师姓名</li>
 					<li class="stu_class stu_header" style="width:100px;">年份</li>
 					<li class="stu_major stu_header" style="width:100px;">学期</li>
 					<li class="stu_dept stu_header">课程名称</li>

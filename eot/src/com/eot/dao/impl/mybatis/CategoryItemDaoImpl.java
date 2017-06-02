@@ -18,7 +18,7 @@ public class CategoryItemDaoImpl extends SqlSessionDaoSupport implements ICatego
 	private static final String SQL_ID_findAllCategory = ".findAllCategory";
 	private static final String SQL_ID_findAllItem = ".findAllItem";
 	private static final String SQL_ID_findAllCategoryIsActive = ".findAllCategoryIsActive";
-	private static final String SQL_ID_findAllItemIsActive = ".findAllItem";
+	private static final String SQL_ID_findAllItemIsActive = ".findAllItemIsActive";
 	private static final String SQL_ID_updateCategoryName = ".updateCategoryName";
 	private static final String SQL_ID_updateItem = ".updateItem";
 	private static final String SQL_ID_deleteItem = ".deleteItem";

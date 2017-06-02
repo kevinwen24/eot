@@ -15,4 +15,6 @@ public interface ISchoolInfoService {
 	public List<SchoolInfo> findAllMajor();
 	
 	public List<SchoolInfo> findAllClassByMajorNoAndGrade(int majorNo, String grade);
+	
+	public void addCourse(String courseName, Integer courseScore); 
 }

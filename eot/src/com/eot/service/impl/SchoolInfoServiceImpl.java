@@ -42,4 +42,10 @@ public class SchoolInfoServiceImpl implements ISchoolInfoService{
 		return iSchoolInfoDao.findAllClassByMajorNoAndGrade(majorNo, grade);
 	}
 
+	@Override
+	public void addCourse(String courseName, Integer courseScore) {
+		// TODO Auto-generated method stub
+		iSchoolInfoDao.addCourse(courseName, courseScore);
+	}
+
 }

@@ -12,5 +12,6 @@ public interface IEvaluationService {
 
 	public List<Evaluation> getStudentNeedEvaluationItemByevaluationNo(int evaluationNo);
 
-	public void addEvaluationItemToevaluationNo(int evaluationNo, int itemNo);
+	//批量增加
+	public void addEvaluationItemToevaluationNo(List<Evaluation> lists);
 }

@@ -49,9 +49,12 @@
             	item.category_no = category.category_no 
     </select>
     
-    <insert id="addEvaluationItemToevaluationNo" parameterType="map">
+    <insert id="addEvaluationItemToevaluationNo" parameterType="java.util.List">
     	INSERT INTO evaluation(evaluation.evaluation_no, evaluation.item_no) 
-    	VALUES(#{evaluationNo},#{itemNo})
+    	VALUES
+    	<foreach collection="list" item="item" index="index" separator=",">
+    	(#{item.evaluationNo},#{item.itemNo})
+    	</foreach>
     </insert>
     
     <update id="updateScoreAndStuNum" parameterType="map">
@@ -66,4 +69,5 @@
 	    		item_no = #{itemNo}
     	]]>
     </update>
+    
 </mapper>

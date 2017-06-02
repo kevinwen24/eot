@@ -19,4 +19,6 @@ public interface ITeacherClassDao {
 	
 	public int deleteTeacherClass(int[] ids);
 	
+	public int addTeacherClass(int teacherNo, int courseNo, int classNo);
+	
 }

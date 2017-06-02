@@ -7,6 +7,15 @@ function show_fail_message(str){
 	}, 2000);
 };
 
+function show_success_message(str){
+	$(".success_message_container").html(str);
+	$(".success_message_container").css("display","block");
+	setTimeout(function(){
+		$(".message_container").css("display","none");
+	}, 2000);
+};
+
+
 function getObjById(key) {
     return document.getElementById(key);
 }

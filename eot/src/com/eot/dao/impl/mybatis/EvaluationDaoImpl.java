@@ -33,11 +33,8 @@ public class EvaluationDaoImpl extends SqlSessionDaoSupport implements IEvaluati
 	}
 
 	@Override
-	public void addEvaluationItemToevaluationNo(int evaluationNo, int itemNo) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("evaluationNo", evaluationNo);
-		params.put("itemNo", itemNo);
-		getSqlSession().insert(CLASS_NAME + SQL_ID_ADD_EVALUATION_ITEM_TO_EVALUATIONNO, params);
+	public void addEvaluationItemToevaluationNo(List<Evaluation> lists) {
+		getSqlSession().insert(CLASS_NAME + SQL_ID_ADD_EVALUATION_ITEM_TO_EVALUATIONNO, lists);
 	}
 
 	@Override

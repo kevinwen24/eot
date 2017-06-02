@@ -35,7 +35,7 @@
 			<tr>
 				<td class="input_tip"><label>教授课程</label></td>
 				<td class="input_content">
-					 <select class="form-control " >
+					 <select class="form-control course_select" >
 							<option value="-1">选择课程</option>
 							<%for(int i =0; i < courses.size();i++){ %>
 								<option value="<%=courses.get(i).getCourseNo()%>"><%=courses.get(i).getCourseName() %></option>
@@ -82,7 +82,7 @@
 			</tr>
 		</table>
 		<hr width="99.5%" style="border:1px solid #ccc;margin-left:"/>
-		 <input type="button" class="btn btn-success" value="保存添加" style="float: right; margin-right: 100px;"> 
+		 <input type="button" class="btn btn-success save_teacher_class" value="保存添加" style="float: right; margin-right: 100px;"> 
 	</form>
 </div>	
 
@@ -135,7 +135,7 @@
 	                         $.each(data, function(commentIndex, comment){
 	                               html += '<option value="'+comment["teacherNo"] + '">'+ comment["teacherName"] + '</option>';
 	                         });
-	                         alert(html);
+	                         //alert(html);
 	                         $('.all_teacher_select').append('<option value="-1">选择教师姓名</option>' + html);
 	                      }
 				})
@@ -179,6 +179,39 @@
 	                               html += '<option value="'+comment["classNo"] + '">'+ comment["majorName"] + ' - '+comment["classIndex"] + '班' + '</option>';
 	                         });
 	                         $('.all_select').append(html);
+	                      }
+				})
+			}
+		});
+		
+		$(".save_teacher_class").click(function(){
+			var majorNo = $(".stu_major_select option:selected").val();
+			var grade = $(".student_grade_select option:selected").val();
+			var teacherNo = $(".all_teacher_select option:selected").val();
+			var courseNo = $(".course_select option:selected").val();
+			var classVals = "";
+			$(".commit_select option").each(function(){
+				classVals += $(this).val() +",";
+			});
+			//alert("courseNo/"+courseNo+",teacherNo/"+teacherNo+"classVals/"+classVals);
+			if (majorNo > 0 && grade > 0 && teacherNo > 0 && courseNo > 0 && classVals.length > 1){
+				//alert(1);
+				var params =  {
+			            	 "teacherNo": $(".all_teacher_select option:selected").val(),
+			            	 "courseNo": $(".course_select option:selected").val(),
+			            	 "classNos": "" + classVals.substring(0,classVals.length - 1)
+	            	 	};
+				$.ajax({
+		             type: "POST",
+		             dateType: "json",
+		             data : JSON.stringify(params),
+		             url: "<%=managerPath%>add_teacher_class",
+		             contentType:"application/json",
+		             success: function(data){
+		            		show_success_message("添加老师授课信息成功!");
+		            		setTimeout(function(){
+								location.href="<%=managerPath%>teacher_class";            	 	
+		            		}, 500);
 	                      }
 				})
 			}

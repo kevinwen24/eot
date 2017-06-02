@@ -16,4 +16,6 @@ public void addTeacherClass(TeacherClass teacherClass);
 	public int updateTeacherClass(TeacherClass teacherClass);
 	
 	public int deleteTeacherClass(int[] ids);
+	
+	public int addTeacherClass(int teacherNo, int courseNo, int classNo);
 }

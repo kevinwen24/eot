@@ -13,5 +13,6 @@ public interface IEvaluationDao {
 	
 	public List<Evaluation> getStudentNeedEvaluationItemByevaluationNo(int evaluationNo);
 	
-	public void addEvaluationItemToevaluationNo(int evaluationNo, int itemNo);
+	public void addEvaluationItemToevaluationNo(List<Evaluation> lists);
+	
 }

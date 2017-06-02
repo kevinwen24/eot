@@ -87,4 +87,9 @@
             </choose>
     </select>
    
+   <insert id="addTeacherClass" parameterType="TeacherClass" useGeneratedKeys="true" keyProperty="evaluationNo">
+   		INSERT INTO 
+   		teacher_class(teacher_no, course_no, year, term, class_no)
+   		VALUES(#{teacherNo},#{courseNo},#{year},#{term},#{classNo})
+   </insert>
 </mapper>

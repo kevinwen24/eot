@@ -17,6 +17,7 @@ public class SchoolInfoDaoImpl extends SqlSessionDaoSupport implements ISchoolIn
 	private static final String SQL_ID_findAllTeacherByDeptNo = ".findAllTeacherByDeptNo";
 	private static final String SQL_ID_findAllMajor = ".findAllMajor";
 	private static final String SQL_ID_findAllClassByMajorNoAndGrade = ".findAllClassByMajorNoAndGrade";
+	private static final String SQL_ID_addCourse = ".addCourse";
 	
 	@Override
 	public List<SchoolInfo> findAlldept() {
@@ -48,6 +49,15 @@ public class SchoolInfoDaoImpl extends SqlSessionDaoSupport implements ISchoolIn
 		params.put("grade", grade);
 		params.put("majorNo", majorNo);
 		return getSqlSession().selectList(CLASS_NAME + SQL_ID_findAllClassByMajorNoAndGrade, params);
+	}
+
+	@Override
+	public void addCourse(String courseName, Integer courseScore) {
+		// TODO Auto-generated method stub
+		Map<String, Object> params = new HashMap<>();
+		params.put("courseName", courseName);
+		params.put("courseScore", courseScore);
+		getSqlSession().insert(CLASS_NAME + SQL_ID_addCourse, params);
 	}
 
 }

@@ -50,6 +50,7 @@ INSERT INTO teacher(teacher.te_no, teacher.dept, teacher.rank) VALUES(10001, 1, 
 INSERT INTO teacher(teacher.te_no, teacher.dept, teacher.rank) VALUES(10002, 2, "教师");
 INSERT INTO teacher(teacher.te_no, teacher.dept, teacher.rank) VALUES(10003, 2, "教师");
 INSERT INTO teacher(teacher.te_no, teacher.dept, teacher.rank) VALUES(10004, 2, "教师");
+INSERT INTO teacher(teacher.teacher_no, teacher.dept_no, teacher.rank) VALUES(10005, 2, "教师");
 
 INSERT INTO `user`(`user`.user_id, `user`.`name`, `user`.`password`, `user`.user_role, `user`.gender, `user`.create_date, `user`.last_login_date)
 VALUES(10001, "张其文", "1234", 2, "男", "2000-07-01", "2000-07-01");
@@ -80,7 +81,9 @@ INSERT INTO evaluation(evaluation.teacher_no, evaluation.course_no, evaluation.`
  VALUES(10002, 5, "2017", 0, 2, "2017-03-01 08:00:00");
 INSERT INTO evaluation(evaluation.teacher_no, evaluation.course_no, evaluation.`year`, evaluation.term, evaluation.class_no, evaluation.create_time)
  VALUES(10002, 5, "2017", 0, 3, "2017-03-01 08:00:00");
-
+INSERT INTO `user`(`user`.user_no, `user`.`name`, `user`.`password`, `user`.user_role, `user`.gender, `user`.create_date)
+VALUES(10005, "李小鹏", "1234", 2, "男", "2000-07-01");
+ 
 #create course
 INSERT INTO course(course.course_name, course.course_score) VALUES("软件工程导论",4);
 INSERT INTO course(course.course_name, course.course_score) VALUES("java程序设计",3);

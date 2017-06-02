@@ -38,7 +38,7 @@
             order by item_no desc
         ]]>
 	</select>
-	
+
 	<select id="findAllCategoryIsActive" resultMap="CategoryItemMap">
         <![CDATA[
             SELECT category_no, name categoryName,is_active categoryActive
@@ -57,7 +57,7 @@
             	item.category_no = category.category_no
             AND
 	            item.is_active = 0
-            order by item_no desc
+            order by item_no asc
         ]]>
 	</select>
 	

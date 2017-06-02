@@ -79,9 +79,9 @@ public class EvaluationServiceImpl implements IEvaluationService{
 	}
 
 	@Override
-	public void addEvaluationItemToevaluationNo(int evaluationNo, int itemNo) {
+	public void addEvaluationItemToevaluationNo(List<Evaluation> lists) {
 		// TODO Auto-generated method stub
-		
+		iEvaluationDao.addEvaluationItemToevaluationNo(lists);
 	}
 
 }

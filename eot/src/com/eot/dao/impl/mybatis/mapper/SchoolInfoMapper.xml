@@ -66,4 +66,9 @@
 			ORDER BY course_no desc
         ]]>
     </select>
+    
+    <insert id="addCourse" parameterType="map">
+    	INSERT INTO course(course_name, course_score)
+    	value(#{courseName},#{courseScore})
+    </insert>
 </mapper>

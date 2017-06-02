@@ -42,6 +42,10 @@
 	<!--显示错误信息  -->		
 </div>
 
+<div class="message_container success_message_container" style="background:#5CB85C;display:none;top:10px">
+	<!--显示错误信息  -->		
+</div>
+
 <script type="text/javascript">
 	$(function(){
 		setTimeout(function(){
@@ -100,19 +104,11 @@
 							</ul>
 						</li>
 						<li>
-							<a class="header_nav" href="javascript:void(0)">学生管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<a class="header_nav" href="javascript:void(0)">录入信息  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_ityteemx")%>" target="student_iframe">学生管理</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemyitixsax")%>">增加学生</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemxitisa")%>">批量增加学生</a></li>
-							</ul>
-						</li>
-						<li>
-							<a class="header_nav" href="javascript:void(0)">老师管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemiytin")%>">学生管理</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemfjt")%>">增加学生</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemtuas")%>">批量增加学生</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemyitixsax")%>" target="student_iframe">录入学生信息</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=show_add_course")%>">录入课程信息</a></li>
+								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemxitisa")%>">录入老师信息</a></li>
 							</ul>
 						</li>
 					</ul>
