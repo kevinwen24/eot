@@ -95,6 +95,7 @@
     
     <bean id="studentService" class="com.eot.service.impl.StudentServiceImpl" scope="singleton" >
         <property name="studentDao" ref="studentDao" />
+        <property name="userDao" ref="userDao" />
     </bean>
     
     <bean id="categoryItemService" class="com.eot.service.impl.CategoryItemServiceImpl" scope="singleton" >
@@ -114,4 +115,9 @@
     </bean>
 
     <bean class="com.eot.util.SpringUtil"></bean>
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+	    <property name="maxUploadSize" value="10485760" />  
+	</bean>
+	
 </beans>

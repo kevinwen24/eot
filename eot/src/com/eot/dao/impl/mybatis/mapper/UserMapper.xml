@@ -27,4 +27,12 @@
 		AND
 			`user`.user_no = #{userId}
 	</select>
+	
+	<insert id="addBatchUser" parameterType="java.util.List">
+		INSERT INTO Student(user_no, name, password, user_role, gender)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+    		(#{item.userNo},#{item.name},#{item.password},#{item.gender})
+    	</foreach>
+	</insert>
 </mapper>

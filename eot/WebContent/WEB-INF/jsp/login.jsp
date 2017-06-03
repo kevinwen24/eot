@@ -50,8 +50,8 @@
                       	<span style="margin-right:10px">账号类型:</span>
                     	<label for="student">学生</label>
                     	<input type="radio" name="role" value="3" id="student"/>
-                    	<label for="teacher">老师</label>
-                    	<input type="radio" name="role" value="2" id="teacher"/>
+                    	<!-- <label for="teacher">老师</label>
+                    	<input type="radio" name="role" value="2" id="teacher"/> -->
                     	<label for="admin">管理员</label>
                     	<input type="radio" name="role" value="1"  id="admin" />
                     </div>  

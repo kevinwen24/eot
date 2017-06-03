@@ -1,5 +1,7 @@
 package com.eot.service.impl;
 
+import java.util.List;
+
 import com.eot.dao.IUserDao;
 import com.eot.model.User;
 import com.eot.service.IUserService;
@@ -21,6 +23,12 @@ public class UserServiceImpl implements IUserService{
 	public User getUserByUserId(int userId) {
 		// TODO Auto-generated method stub
 		return iUserDao.getUserByUserId(userId);
+	}
+
+	@Override
+	public void addStudent(List<User> users) {
+		// TODO Auto-generated method stub
+		iUserDao.addBatchUser(users);
 	}
 
 }

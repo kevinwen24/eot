@@ -106,7 +106,7 @@
 						<li>
 							<a class="header_nav" href="javascript:void(0)">录入信息  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemyitixsax")%>" target="student_iframe">录入学生信息</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=show_add_student")%>" target="student_iframe">录入学生信息</a></li>
 								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=show_add_course")%>">录入课程信息</a></li>
 								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemxitisa")%>">录入老师信息</a></li>
 							</ul>

@@ -1,6 +1,7 @@
 package com.eot.dao.impl.mybatis;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -13,6 +14,7 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements IUserDao{
 	private static String CLASS_NAME = User.class.getName();
 	private static String SQL_ID_UPDATE_USER_PASSWORD = ".updatePasswordByUserNo";
 	private static String SQL_ID_getUserByUserId = ".getUserByUserId";
+	private static String SQL_ID_addBatchUser = ".addBatchUser";
 	
 	@Override
 	public void updatePasswordByUserNo(int userNo, String password) {
@@ -26,6 +28,12 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements IUserDao{
 	public User getUserByUserId(int userId) {
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne(CLASS_NAME + SQL_ID_getUserByUserId, userId);
+	}
+
+	@Override
+	public void addBatchUser(List<User> users) {
+		// TODO Auto-generated method stub
+		getSqlSession().insert(CLASS_NAME + SQL_ID_addBatchUser, users);
 	}
 
 }

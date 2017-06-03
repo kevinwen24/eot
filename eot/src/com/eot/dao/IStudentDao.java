@@ -19,4 +19,12 @@ public interface IStudentDao {
 	
 	public List<Student> findAllStudent(Pagination pagination);	
 	
+	public void addBatchStudent(List<Student> students);
+	
+	public Integer getStudentClassNoBycondition(String grade, int classIndex, int majorNo);
+	
+	public Integer getStudentMajorNoByMajorName(String majorName);
+	
+	public Integer getStudentDeptNoByDeptName(String deptName);
+	
 }

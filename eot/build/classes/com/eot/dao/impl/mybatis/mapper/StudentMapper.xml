@@ -34,4 +34,39 @@
 		WHERE student_no = #{student_no}
 	</select>
 	
+	<insert id="addBatchStudent" parameterType="java.util.List">
+		INSERT INTO Student(student_no, dept_no, major_no, class_no)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+    		(#{item.studentNo},#{item.deptNo},#{item.majorNo},#{item.classNo})
+    	</foreach>
+	</insert>
+	
+	<select id="getStudentClassNoBycondition" parameterType="map" resultType="Integer">
+		SELECT class_no
+		FROM 
+		class
+		WHERE 
+			grade=#{grade}
+		AND
+			class_index=#{classIndex}
+		AND 
+			major_no=#{majorNo}	
+	</select>
+	
+	<select id="getStudentMajorNoByMajorName" parameterType="String" resultType="Integer">
+		SELECT major_no
+		FROM
+			major
+		WHERE 
+			name=#{majorName}
+	</select>
+	
+	<select id="getStudentDeptNoByDeptName" parameterType="String" resultType="Integer">
+		SELECT dept_no
+		FROM 
+			dept
+		WHERE
+			name=#{deptName}
+	</select>
 </mapper>

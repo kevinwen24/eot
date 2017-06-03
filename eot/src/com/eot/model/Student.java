@@ -8,7 +8,8 @@ public class Student {
 	private Integer deptNo;
 	private Integer majorNo;
 	private Integer classNo;
-
+	private Integer classIndex;
+	
 	private String name;
 	private String password;
 	private int roleId;
@@ -23,7 +24,7 @@ public class Student {
 	private String deptName;
 
 	private Integer isActive;
-	
+
 	public Integer getStudentNo() {
 		return studentNo;
 	}
@@ -160,4 +161,13 @@ public class Student {
 		this.isActive = isActive;
 	}
 
+	public Integer getClassIndex() {
+		return classIndex;
+	}
+
+	public void setClassIndex(Integer classIndex) {
+		this.classIndex = classIndex;
+	}
+
+	
 }
