@@ -8,10 +8,15 @@
 <%
 	String managerPath = PathUtil.getFullPath("manager/");
 	String importMsg="";  
-	if(request.getSession().getAttribute("msg")!=null){  
-	   importMsg=request.getSession().getAttribute("msg").toString();  
+	if(request.getSession().getAttribute("msg") != null){  
+	   importMsg=(String)request.getSession().getAttribute("msg");  
+		%>
+		<script type="text/javascript"> 
+			show_fail_message_long("<%=importMsg %>");
+		</script>
+		<%
 	}  
-	request.getSession().setAttribute("msg", "");  
+	request.getSession().setAttribute("msg", null);  
 %>
 
 <div id="content">
@@ -28,7 +33,6 @@
 	         <input id="excel_file" type="file" name="filename" accept="xlsx" size="80"/>
 	         <input id="excel_button" type="submit" value="导入Excel" class="btn btn-success" style="margin-top:30px;"/>
          </div>
-         <font id="importMsg" color="red"><%=importMsg%></font><input type="hidden"/>
      </form>
 	</div>
 </div>
@@ -43,13 +47,4 @@ function check() {
       }  
  } 
 
-$(document).ready(function () {  
-       var msg="";  
-       if($("#importMsg").text()!=null){  
-           msg=$("#importMsg").text();  
-       }  
-       if(msg!=""){  
-           show_success_message(msg);  
-       }  
-});  
 </script>

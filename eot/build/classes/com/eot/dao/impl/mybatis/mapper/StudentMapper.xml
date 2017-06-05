@@ -4,7 +4,7 @@
 <mapper namespace="com.eot.model.Student">
 
     <resultMap type="Student" id="StudentMap">
-        <id column="id" property="id"/>
+        <result column="student_no" property="studentNo"/>
         <result column="question_id" property="questionId"/>
         <result column="title" property="title"/>
         <result column="option_a" property="optionA"/>
@@ -17,16 +17,6 @@
         <result column="is_alive" property="isAlive"/>
     </resultMap>
 
-	<select id="findAllTeacherClass" parameterType="map" resultMap="StudentMap">
-        <![CDATA[
-            SELECT id, teacher_no, teacher_name, teacher_dept, grade, title, major_name, class_no, major_name, depet_name, course_name, year, term
-            FROM evaluation , teacher, dept, user ,
-            
-            WHERE is_alive = 0 AND title LIKE CONCAT('%',#{search},'%')
-            ORDER BY id ${sort} 
-            LIMIT #{offset},#{pageSize}
-        ]]>
-    </select>
     
 	<select id="getStudentClassNo" parameterType="int" resultType="int">
 		SELECT class_no
@@ -69,4 +59,12 @@
 		WHERE
 			name=#{deptName}
 	</select>
+	
+	<select id="getStudentByStudentNo" parameterType="int" resultMap="StudentMap">
+		SELECT student_no
+		FROM
+			student
+		WHERE student_no=#{studentNo}
+	</select>
+	
 </mapper>

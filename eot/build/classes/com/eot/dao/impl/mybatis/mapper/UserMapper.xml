@@ -29,10 +29,10 @@
 	</select>
 	
 	<insert id="addBatchUser" parameterType="java.util.List">
-		INSERT INTO Student(user_no, name, password, user_role, gender)
+		INSERT INTO user(user_no, name, password, user_role, gender,phone)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
-    		(#{item.userNo},#{item.name},#{item.password},#{item.gender})
+    		(#{item.userId},#{item.name},#{item.password},#{item.roleId}, #{item.gender},#{item.phone})
     	</foreach>
 	</insert>
 </mapper>

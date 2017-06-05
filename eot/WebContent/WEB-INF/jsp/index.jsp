@@ -50,7 +50,7 @@
 	$(function(){
 		setTimeout(function(){
 			$(".message_container").css("display","none");
-		}, 2000);
+		}, 3000);
 	})
 </script>
 

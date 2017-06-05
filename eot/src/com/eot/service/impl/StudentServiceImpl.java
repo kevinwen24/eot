@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.eot.dao.IStudentDao;
 import com.eot.dao.IUserDao;
+import com.eot.exception.ExistSchoolInfoException;
 import com.eot.model.Student;
 import com.eot.model.User;
 import com.eot.service.IStudentService;
@@ -55,7 +56,7 @@ public class StudentServiceImpl implements IStudentService{
 	}
 
 	@Override
-	public boolean batchImport(String name, MultipartFile file) {
+	public boolean batchImport(String name, MultipartFile file) throws ExistSchoolInfoException{
 
 		 boolean b = false;
 	        //创建处理EXCEL
@@ -74,9 +75,31 @@ public class StudentServiceImpl implements IStudentService{
 	        //迭代添加客户信息（注：实际上这里也可以直接将customerList集合作为参数，在Mybatis的相应映射文件中使用foreach标签进行批量添加。）
 	        for(int i = 0; i< studentList.size(); i++){
 	        	Student student = studentList.get(i);
+	        	Student stu = iStudentDao.getStudentByStudentNo(student.getStudentNo());
+	        	
+	        	if(stu != null){
+	        		throw new ExistSchoolInfoException("学生已经存在 -> 学号： " + student.getStudentNo() + ", 行号 " + (i+2));
+	        	}
+	        	
 	        	Integer deptNo = iStudentDao.getStudentDeptNoByDeptName(student.getDeptName());
+	        	
+	        	if (deptNo == null){
+	        		throw new ExistSchoolInfoException("不存在该学院 -> " + student.getDeptName() + ", 行号 " + (i+2));
+	        	}
+	        	
 	        	Integer majorNo = iStudentDao.getStudentMajorNoByMajorName(student.getMajorName());
+	        	
+	        	if (majorNo == null){
+	        		throw new ExistSchoolInfoException("不存在该专业 -> " + student.getMajorName() + ", 行号 " + (i+2));
+	        	}
+	        	
 	        	Integer classNo = iStudentDao.getStudentClassNoBycondition(student.getGrade(), student.getClassIndex(), majorNo);
+	        	
+	        	if (classNo == null){
+	        		throw new ExistSchoolInfoException("不存在该年级 -> " + student.getGrade()
+	        		+ ", 或不存在"+student.getMajorName() +" "
+	        	    + student.getClassIndex()+ " 班, 行号 " + (i+2));
+	        	}
 	        	
 	        	student.setDeptNo(deptNo);
 	        	student.setMajorNo(majorNo);
@@ -91,6 +114,9 @@ public class StudentServiceImpl implements IStudentService{
 	        	user.setRoleId(3);
 	        	users.add(user);
 	        }
+	        
+	        iStudentDao.addBatchStudent(studentList);
+	        iUserDao.addBatchUser(users);
 	        return b;
 	}
 

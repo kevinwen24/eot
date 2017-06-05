@@ -16,6 +16,18 @@ function show_success_message(str){
 };
 
 
+
+function show_fail_message_long(str){
+	$(".fail_message_container").html(str);
+	$(".fail_message_container").css("width","400px");
+	$(".fail_message_container").css("display","block");
+	setTimeout(function(){
+		$(".message_container").css("display","none");
+		$(".fail_message_container").css("width","300px");
+	}, 6000);
+};
+
+
 function getObjById(key) {
     return document.getElementById(key);
 }

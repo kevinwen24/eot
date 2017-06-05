@@ -18,6 +18,7 @@ public class StudentDaoImpl extends SqlSessionDaoSupport implements IStudentDao{
 	private static String SQL_ID_getStudentClassNoBycondition = ".getStudentClassNoBycondition";
 	private static String SQL_ID_getStudentMajorNoByMajorName = ".getStudentMajorNoByMajorName";
 	private static String SQL_ID_getStudentDeptNoByDeptName = ".getStudentDeptNoByDeptName";
+	private static String SQL_ID_getStudentByStudentNo = ".getStudentByStudentNo";
 	
 	@Override
 	public int getStudentClassNo(int studentNo) {
@@ -45,7 +46,7 @@ public class StudentDaoImpl extends SqlSessionDaoSupport implements IStudentDao{
 	@Override
 	public Student getStudentByStudentNo(int studentNo) {
 		// TODO Auto-generated method stub
-		return null;
+		return getSqlSession().selectOne(CLASS_NAME + SQL_ID_getStudentByStudentNo, studentNo);
 	}
 
 	@Override
