@@ -37,11 +37,11 @@
         <form action="<%=PathUtil.getFullPath("student/modifypass") %>" method="post" id="modify_pass_form">
           <div class="form-group" style="maring:40px 0px;">
             <label for="recipient-name" class="control-label">请输入密码:</label>
-            <input type="text" class="form-control mypass" id="recipient-name" name="password" />
+            <input type="password" class="form-control mypass" id="recipient-name" name="password" />
           </div>
           <div class="form-group">
             <label for="message-text" class="control-label" >再次确认密码:</label>
-           	<input type="text" class="form-control myrepeatPass" id="recipient-name"/>
+           	<input type="password" class="form-control myrepeatPass" id="recipient-name"/>
           </div>
         </form>
       </div>

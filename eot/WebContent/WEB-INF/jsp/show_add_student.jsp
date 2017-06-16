@@ -17,6 +17,15 @@
 		<%
 	}  
 	request.getSession().setAttribute("msg", null);  
+	if(request.getSession().getAttribute("succ_msg") != null){  
+		   importMsg=(String)request.getSession().getAttribute("succ_msg");  
+			%>
+			<script type="text/javascript"> 
+				show_success_message("<%=importMsg %>");
+			</script>
+			<%
+	}  
+	request.getSession().setAttribute("succ_msg", null);  
 %>
 
 <div id="content">

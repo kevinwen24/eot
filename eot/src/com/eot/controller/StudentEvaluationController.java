@@ -39,7 +39,9 @@ public class StudentEvaluationController extends BaseController{
 	public IEvaluationTimeService evaluationTimeService;
 	
 	@RequestMapping("/show")
-	public ModelAndView showNeedEvaluation() {
+	public ModelAndView showNeedEvaluation(
+				HttpSession session
+			) {
 		ModelAndView modelAndView = new ModelAndView();
 		Date currentDate = new Date();
 		EvaluationTime evaluationTimeJudge = evaluationTimeService.getThisYearStartEndDate(DateUtil.getYear(currentDate), DateUtil.getTerm(currentDate));
@@ -64,7 +66,7 @@ public class StudentEvaluationController extends BaseController{
 			}
 		}
 		
-		List<Evaluation> evaluationClasss = evaluationService.getStudentAllNeedEvaluatonClass(13270132);
+		List<Evaluation> evaluationClasss = evaluationService.getStudentAllNeedEvaluatonClass(((User)session.getAttribute("user")).getUserId());
 		modelAndView.addObject("evaluationClasss", evaluationClasss);
 		modelAndView.setViewName("student_evaluation");
 		return modelAndView;

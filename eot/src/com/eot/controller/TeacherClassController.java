@@ -2,7 +2,13 @@
  package com.eot.controller;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,13 +24,16 @@ import com.eot.model.CategoryItem;
 import com.eot.model.Evaluation;
 import com.eot.model.SchoolInfo;
 import com.eot.model.TeacherClass;
+import com.eot.model.User;
 import com.eot.service.ICategoryItemService;
 import com.eot.service.IEvaluationService;
 import com.eot.service.ISchoolInfoService;
 import com.eot.service.ITeacherClassService;
+import com.eot.util.DateUtil;
 import com.eot.util.Pagination;
 import com.eot.util.PaginationUtil;
 import com.eot.util.PropertyUtil;
+import com.eot.util.ReqUtil;
 
 import net.sf.json.JSONObject;
 
@@ -160,4 +169,79 @@ public class TeacherClassController extends BaseController{
 		evaluationService.addEvaluationItemToevaluationNo(addEvaluationMapping);
 		return "1";
 	}
+	
+	@RequestMapping(value = "/teaching_rank", method = {RequestMethod.GET})
+	public ModelAndView rankTeacherTeaching() {
+		ModelAndView modelAndView = new ModelAndView();
+		Set<Evaluation> teachingRank = evaluationService.teachingRank();
+		Set<Evaluation> teachingRankCondition = new TreeSet<>(new CustomComparator());
+		String year = DateUtil.getYear(new Date());
+		int term = DateUtil.getTerm(new Date());
+		for(Evaluation eval : teachingRank){
+			if(year.equals(eval.getYear()) &&  term== eval.getTerm()){
+				teachingRankCondition.add(eval);
+			}
+		}
+		ReqUtil reqUtil= new ReqUtil();
+		reqUtil.setTerm(term+1);
+		reqUtil.setYear(year+"");
+		modelAndView.addObject("teachingRank", teachingRankCondition);
+		modelAndView.addObject("forwardPage", "teaching_rank");
+		modelAndView.addObject("reqUtil", reqUtil);
+		List<SchoolInfo> depts = SchoolInfoService.findAlldept();
+		modelAndView.addObject("depts", depts);
+		modelAndView.setViewName("index");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/teaching_rank_condition", method = {RequestMethod.POST})
+	public ModelAndView rankTeacherTeachingCondition(
+											@RequestParam (value="deptNo", required=false,  defaultValue="0") Integer deptNo,
+											@RequestParam (value="year",  required=false, defaultValue="0") Integer year,
+											@RequestParam (value="term",  required=false, defaultValue="0") Integer term
+			) {
+		ModelAndView modelAndView = new ModelAndView();
+		Set<Evaluation> teachingRank = evaluationService.teachingRank();
+		Set<Evaluation> teachingRankCondition = new TreeSet<>(new CustomComparator());
+		
+		for(Evaluation eval : teachingRank){
+			if(deptNo == -1){
+				if((year+"").equals(eval.getYear()) && (term-1) == eval.getTerm()){
+					teachingRankCondition.add(eval);
+				}
+			}else if(deptNo == eval.getDeptNo() && (year+"").equals(eval.getYear()) && (term-1) == eval.getTerm()){
+				teachingRankCondition.add(eval);
+			}
+		}
+		ReqUtil reqUtil= new ReqUtil();
+		reqUtil.setDeptNo(deptNo);
+		reqUtil.setTerm(term);
+		reqUtil.setYear(year+"");
+		modelAndView.addObject("teachingRank", teachingRankCondition);
+		modelAndView.addObject("forwardPage", "teaching_rank");
+		modelAndView.addObject("reqUtil", reqUtil);
+		List<SchoolInfo> depts = SchoolInfoService.findAlldept();
+		modelAndView.addObject("depts", depts);
+		modelAndView.setViewName("index");
+		return modelAndView;
+	}
+	
+}
+
+class CustomComparator implements Comparator<Evaluation>{
+
+	@Override
+	public int compare(Evaluation arg0, Evaluation arg1) {
+
+		if(arg0.getAvg() > arg1.getAvg()){
+			return -1;
+		}else if(arg0.getAvg() < arg1.getAvg()){
+			return 1;
+		} else if(arg0.getEvaluationNo() < arg1.getEvaluationNo()){
+			
+			return 1;
+		} 
+		return 1;
+	}
+	
 }

@@ -50,7 +50,7 @@
 	$(function(){
 		setTimeout(function(){
 			$(".message_container").css("display","none");
-		}, 3000);
+		}, 4000);
 	})
 </script>
 
@@ -77,38 +77,32 @@
 							</ul>
 						</li>
 						<li>
-							<a class="header_nav" href="javascript:void(0)">评教分类  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<a class="header_nav" href="javascript:void(0)">评教类别管理  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
 								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_category")%>">查看分类</a></li>
 								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=add_category")%>">添加分类</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_item")%>">查看评教项</a></li>
+								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/show_add_item")%>">添加评教项</a></li>
  							</ul>
 						</li>
 						<li>
-							<a class="header_nav" href="javascript:void(0)">评教项  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<a class="header_nav" href="javascript:void(0)"> 设置评教时间 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_item")%>">查看评教项</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/show_add_item")%>">添加评教项</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/show_set_time")%>">设置时间</a></li>
 							</ul>
 						</li>
 						<li>
-							<a class="header_nav" href="javascript:void(0)">设置时间  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+							<a class="header_nav" href="javascript:void(0)">评价排名  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/show_set_time")%>">设置评教时间</a></li>
-							</ul>
-						</li>
-						<li>
-							<a class="header_nav" href="javascript:void(0)">统计图表  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/view_itemmrrryr")%>">排名</a></li>
-								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/view_itemnerm")%>">统计图</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/teaching_rank")%>">排名信息</a></li>
 							</ul>
 						</li>
 						<li>
 							<a class="header_nav" href="javascript:void(0)">录入信息  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
 							<ul class="second_container">
-								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=show_add_student")%>" target="student_iframe">录入学生信息</a></li>
+								<li class="second_nav"><i class="nav_icon_1"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=show_add_student")%>" >录入学生信息</a></li>
 								<li class="second_nav"><i class="nav_icon_2"></i><a href="<%=PathUtil.getFullPath("manager/forward?action=show_add_course")%>">录入课程信息</a></li>
-								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/view_itemxitisa")%>">录入老师信息</a></li>
+								<li class="second_nav"><i class="nav_icon_3"></i><a href="<%=PathUtil.getFullPath("manager/show_add_teacher")%>">录入老师信息</a></li>
 							</ul>
 						</li>
 					</ul>

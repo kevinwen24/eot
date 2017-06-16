@@ -14,7 +14,8 @@ public class Teacher {
 	private String address;
 	private String phone;
 	private String deptName;
-	
+	private Integer deptNo;
+	private String rank;
 	public Teacher() {
 		super();
 	}
@@ -91,6 +92,21 @@ public class Teacher {
 				+ ", gender=" + gender + ", birthday=" + birthday + ", visit_date=" + visit_date + ", nativePlace="
 				+ nativePlace + ", address=" + address + ", phone=" + phone + ", deptName=" + deptName + "]";
 	}
-	
+
+	public String getRank() {
+		return rank;
+	}
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+
+	public Integer getDeptNo() {
+		return deptNo;
+	}
+
+	public void setDeptNo(Integer deptNo) {
+		this.deptNo = deptNo;
+	}
 	
 }

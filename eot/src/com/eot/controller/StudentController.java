@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.eot.common.Constants;
 import com.eot.exception.ExistSchoolInfoException;
+import com.eot.exception.NotEmptyException;
 import com.eot.service.IStudentService;
 
 @Controller
@@ -41,14 +42,17 @@ public class StudentController {
          boolean b;
          try {
         	 b = studentService.batchImport(name,file);
-         } catch (ExistSchoolInfoException e) {
+         }catch (NotEmptyException e) {
+        	 request.getSession().setAttribute("msg","导入失败! "+e.getMessage());  
+			 return modelAndView;
+		 }catch (ExistSchoolInfoException e) {
 			 request.getSession().setAttribute("msg","导入失败! "+e.getMessage());  
 			 return modelAndView;
 			// e.printStackTrace();
          }
          
          String Msg ="批量导入学生成功！";
-         request.getSession().setAttribute("msg",Msg);    
+         request.getSession().setAttribute("succ_msg",Msg);    
          return modelAndView;
      }
 }

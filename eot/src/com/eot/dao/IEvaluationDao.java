@@ -15,4 +15,9 @@ public interface IEvaluationDao {
 	
 	public void addEvaluationItemToevaluationNo(List<Evaluation> lists);
 	
+	public List<Evaluation> allTeacherTeaching();
+	
+	public List<Evaluation> findEvaluationNoGroupByCondition(int teacherNo,int courseNo,String year,int term);
+	
+	public List<Evaluation> allEvaluationNoAvg();
 }

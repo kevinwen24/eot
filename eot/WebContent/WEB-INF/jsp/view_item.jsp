@@ -26,7 +26,7 @@
 	</div>
 	<div class="content_body" style="overflow: scroll;height:450px;">
 		<ul>
-			<li class="data_line">
+			<li class="data_line" >
 				<ul class="data_line_container stu_header_ul">
 					<li class="stu_index stu_header" style="margin-left:50px;width:50px;">序号</li>
 					<li class="stu_no stu_header" style="width:80px;">评教编号</li>
@@ -53,9 +53,10 @@
 									<span style="color:red;">已删除</span>
 								</c:if>
 							</li>
-							<li class="stu_major" style="width:200px;">
-								<span class="glyphicon glyphicon-pencil edit_date" style="margin-right:30px;cursor:pointer;"></span>
+							<li class="stu_major" style="width:200px;"> <span style="opacity:0.1">.</span>
 								<c:if test="${item.itemActive == 0 }">
+								
+								<span class="glyphicon glyphicon-pencil edit_date" style="margin-right:30px;cursor:pointer;"></span>
 									<span class="glyphicon glyphicon-trash delete_date" style="cursor:pointer;"></span>
 								</c:if>
 							</li>

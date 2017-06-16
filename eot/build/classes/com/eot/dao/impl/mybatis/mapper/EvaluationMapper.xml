@@ -8,13 +8,18 @@
         <result column="item_no" property="itemNo"/>
         <result column="category_name" property="categoryName"/>
         <result column="item_name" property="itemName"/>
+        <result column="course_name" property="courseName"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="dept_no" property="deptNo"/>
+        <result column="teacher_name" property="teacherName"/>
     	<result column="teacher_no" property="teacherNo"/>
         <result column="course_no" property="courseNo"/>
         <result column="year" property="year"/>
         <result column="term" property="term"/>
         <result column="class_no" property="teacherNo"/>
-        <result column="stu_number" property="studentNum"/>
-        <result column="score" property="teacherNo"/>
+        <result column="student_number" property="studentNum"/>
+        <result column="score" property="score"/>
+        <result column="avg" property="avg"/>
     </resultMap>
 
 	<select id="getStudentAllNeedEvaluatonClass" parameterType="map" resultMap="EvaluationMap">
@@ -70,4 +75,37 @@
     	]]>
     </update>
     
+    <select id="allEvaluationNoAvg" resultMap="EvaluationMap">
+	    select evaluation.evaluation_no,
+	    		sum(evaluation.score)/evaluation.student_num avg,
+	    		evaluation.student_num student_number 
+		from evaluation
+		GROUP BY evaluation_no 
+    </select>
+    
+    <select id="allTeacherTeaching" resultMap="EvaluationMap">
+   		SELECT evaluation_no,term,year,teacher_class.course_no,teacher_class.teacher_no,`user`.name teacher_name,
+   			course_name,dept.`name` dept_name,dept.dept_no
+		FROM teacher_class,course,dept,teacher,`user`
+		where 
+			teacher_class.course_no = course.course_no
+		And 
+			dept.dept_no = teacher.dept_no
+		And 
+			teacher.teacher_no = teacher_class.teacher_no
+		And
+			`user`.user_no = teacher.teacher_no
+
+		GROUP BY 
+			TERM,YEAR,teacher_class.teacher_no,teacher_class.course_no
+    </select>
+    
+    <select id="findEvaluationNoGroupByCondition" resultMap="EvaluationMap" parameterType="map">
+    	SELECT teacher_class.evaluation_no
+		from teacher_class
+		WHERE teacher_no = #{teacherNo}
+		AND year = #{year}
+		AND term = #{term}
+		And course_no = #{courseNo}
+    </select>
 </mapper>

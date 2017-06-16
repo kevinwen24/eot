@@ -1,8 +1,12 @@
 package com.eot.service.impl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.eot.dao.IEvaluationDao;
 import com.eot.dao.IEvaluationStatusDao;
@@ -84,4 +88,55 @@ public class EvaluationServiceImpl implements IEvaluationService{
 		iEvaluationDao.addEvaluationItemToevaluationNo(lists);
 	}
 
+	@Override
+	public Set<Evaluation> teachingRank() {
+		 List<Evaluation> allTeacherTeaching = iEvaluationDao.allTeacherTeaching();
+		 List<Evaluation> allEvaluationNoAvg = iEvaluationDao.allEvaluationNoAvg();
+		 
+		 for(Evaluation evaluation : allTeacherTeaching){
+			 List<Evaluation> findEvaluationNoGroupByCondition = iEvaluationDao.findEvaluationNoGroupByCondition(evaluation.getTeacherNo(),
+					 evaluation.getCourseNo(), evaluation.getYear(), evaluation.getTerm());
+			 float avg = 0;
+			 int studentNum = 0;
+			 for(Evaluation eva : findEvaluationNoGroupByCondition){
+				 
+				 for(Evaluation eval : allEvaluationNoAvg){
+					 if(eval.getEvaluationNo() == eva.getEvaluationNo()){
+						 avg += eval.getAvg();
+						 studentNum += eval.getStudentNum();
+					 }
+				 }
+				 
+			 }
+			 DecimalFormat decimalFormat = new DecimalFormat("#.00");
+			 evaluation.setAvg(Float.parseFloat(decimalFormat.format(avg)));
+			 evaluation.setStudentNum(studentNum);
+		 }
+		 
+	 	Set<Evaluation> evaluations = new TreeSet<>(new CustomComparator());
+		for(Evaluation eval : allTeacherTeaching){
+			evaluations.add(eval);
+		}
+		
+		return evaluations;
+	}
+
+}
+
+class CustomComparator implements Comparator<Evaluation>{
+
+	@Override
+	public int compare(Evaluation arg0, Evaluation arg1) {
+
+		if(arg0.getAvg() > arg1.getAvg()){
+			return -1;
+		}else if(arg0.getAvg() < arg1.getAvg()){
+			return 1;
+		} else if(arg0.getEvaluationNo() < arg1.getEvaluationNo()){
+			
+			return 1;
+		} 
+		return 1;
+	}
+	
 }

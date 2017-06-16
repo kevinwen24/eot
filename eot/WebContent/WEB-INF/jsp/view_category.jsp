@@ -41,8 +41,8 @@
 								</c:if>
 							</li>
 							<li class="stu_class" style="width:200px;">
-								<span class="glyphicon glyphicon-pencil edit_date" style="margin-right:30px;cursor:pointer;"></span>
 								<c:if test="${categoryItem.categoryActive == 0 }">
+								<span class="glyphicon glyphicon-pencil edit_date" style="margin-right:30px;cursor:pointer;"></span>
 									<span class="glyphicon glyphicon-trash delete_date" style="cursor:pointer;"></span>
 								</c:if>
 							</li>

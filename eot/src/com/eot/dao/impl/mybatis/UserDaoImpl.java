@@ -15,6 +15,8 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements IUserDao{
 	private static String SQL_ID_UPDATE_USER_PASSWORD = ".updatePasswordByUserNo";
 	private static String SQL_ID_getUserByUserId = ".getUserByUserId";
 	private static String SQL_ID_addBatchUser = ".addBatchUser";
+	private static String SQL_ID_addTeacher = ".addTeacher";
+	private static String SQL_ID_addUser = ".addUser";
 	
 	@Override
 	public void updatePasswordByUserNo(int userNo, String password) {
@@ -34,6 +36,21 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements IUserDao{
 	public void addBatchUser(List<User> users) {
 		// TODO Auto-generated method stub
 		getSqlSession().insert(CLASS_NAME + SQL_ID_addBatchUser, users);
+	}
+
+	@Override
+	public void addTeacher(int teacherNo, int deptNo, String rank) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("teacherNo", teacherNo);
+		params.put("deptNo", deptNo);
+		params.put("rank", rank);
+		getSqlSession().insert(CLASS_NAME + SQL_ID_addTeacher, params);
+	}
+
+	@Override
+	public void addUser(User user) {
+		// TODO Auto-generated method stub
+		getSqlSession().insert(CLASS_NAME + SQL_ID_addUser, user);
 	}
 
 }

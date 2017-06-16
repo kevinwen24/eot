@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.eot.service.*;
+import com.eot.exception.NotEmptyException;
 import com.eot.model.*;
 
 public class ReadExcel {
@@ -56,7 +57,7 @@ public class ReadExcel {
    * @param fielName
    * @return
    */
-  public List<Student> getExcelInfo(String fileName,MultipartFile Mfile){
+  public List<Student> getExcelInfo(String fileName,MultipartFile Mfile) throws NotEmptyException{
       
       //把spring文件上传的MultipartFile转换成CommonsMultipartFile类型
        CommonsMultipartFile cf= (CommonsMultipartFile)Mfile; //获取本地存储路径
@@ -91,6 +92,8 @@ public class ReadExcel {
           //根据excel里面的内容读取客户信息
           customerList = getExcelInfo(is, isExcel2003); 
           is.close();
+      }catch(NotEmptyException e){
+    	  throw new NotEmptyException(e.getMessage());
       }catch(Exception e){
           e.printStackTrace();
       } finally{
@@ -113,7 +116,7 @@ public class ReadExcel {
    * @return
    * @throws IOException
    */
-  public  List<Student> getExcelInfo(InputStream is,boolean isExcel2003){
+  public  List<Student> getExcelInfo(InputStream is,boolean isExcel2003) throws NotEmptyException{
        List<Student> customerList=null;
        try{
            /** 根据版本选择创建Workbook的方式 */
@@ -126,7 +129,12 @@ public class ReadExcel {
                wb = new XSSFWorkbook(is); 
            }
            //读取Excel里面客户的信息
-           customerList=readExcelValue(wb);
+           try{
+        	   customerList=readExcelValue(wb);
+           }catch(NotEmptyException e){
+        	   throw new NotEmptyException(e.getMessage());
+           }
+          
        }
        catch (IOException e)  {  
            e.printStackTrace();  
@@ -138,7 +146,7 @@ public class ReadExcel {
    * @param wb
    * @return
    */
-  private List<Student> readExcelValue(Workbook wb){ 
+  private List<Student> readExcelValue(Workbook wb) throws NotEmptyException{ 
       //得到第一个shell  
        Sheet sheet=wb.getSheetAt(0);
        
@@ -164,6 +172,9 @@ public class ReadExcel {
                Cell cell = row.getCell(c);
                if (null != cell){
             	  String val = cell.getStringCellValue();
+            	  if("".equals(val)){
+            		  throw new NotEmptyException("数据不能为空: 行"+(r+1)+", 列"+(c+1));
+            	  }
             	  System.out.println(val);
                    if(c==0){
                 	   student.setStudentNo(Integer.parseInt(val));

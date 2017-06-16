@@ -12,7 +12,8 @@ public class Evaluation {
 	// 评教人数
 	private Integer studentNum;
 	private float score;
-
+	private float avg;
+	
 	private Integer categoryNo;
 	private String categoryName;
 
@@ -21,6 +22,8 @@ public class Evaluation {
 	private String courseName;
 	// 教师所属学院
 	private String deptName;
+	private int deptNo;
+	private int rank;
 	public Integer getEvaluationNo() {
 		return evaluationNo;
 	}
@@ -110,6 +113,24 @@ public class Evaluation {
 	}
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
+	}
+	public float getAvg() {
+		return avg;
+	}
+	public void setAvg(float avg) {
+		this.avg = avg;
+	}
+	public int getDeptNo() {
+		return deptNo;
+	}
+	public void setDeptNo(int deptNo) {
+		this.deptNo = deptNo;
+	}
+	public int getRank() {
+		return rank;
+	}
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 	
 }

@@ -35,4 +35,17 @@
     		(#{item.userId},#{item.name},#{item.password},#{item.roleId}, #{item.gender},#{item.phone})
     	</foreach>
 	</insert>
+	
+	<insert id="addUser" parameterType="User">
+		INSERT INTO user(user_no, name, password, user_role, gender,phone)
+		VALUES
+    		(#{userId},#{name},#{password},#{roleId}, #{gender},#{phone})
+	</insert>
+	
+	
+	<insert id="addTeacher" parameterType="map">
+		INSERT INTO teacher(teacher_no, dept_no,rank)
+		VALUES
+    	(#{teacherNo},#{deptNo},#{rank})
+	</insert>
 </mapper>

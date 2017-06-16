@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50022
 File Encoding         : 65001
 
-Date: 2017-06-05 16:32:41
+Date: 2017-06-16 10:16:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,8 +33,7 @@ INSERT INTO `category` VALUES ('1', '教学方法', '0');
 INSERT INTO `category` VALUES ('2', '教学内容', '0');
 INSERT INTO `category` VALUES ('3', '教学效果', '0');
 INSERT INTO `category` VALUES ('4', '教学态度', '0');
-INSERT INTO `category` VALUES ('16', '沙发a', '-1');
-INSERT INTO `category` VALUES ('17', 'rz  ', '-1');
+INSERT INTO `category` VALUES ('16', '教学质量', '-1');
 
 -- ----------------------------
 -- Table structure for class
@@ -45,7 +44,9 @@ CREATE TABLE `class` (
   `grade` varchar(10) NOT NULL,
   `class_index` int(11) NOT NULL,
   `major_no` int(11) NOT NULL,
-  PRIMARY KEY  (`class_no`)
+  PRIMARY KEY  (`class_no`),
+  KEY `major_fk` (`major_no`),
+  CONSTRAINT `major_fk` FOREIGN KEY (`major_no`) REFERENCES `major` (`major_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -92,6 +93,7 @@ INSERT INTO `course` VALUES ('6', 'oracle数据库理论', '5', '0');
 INSERT INTO `course` VALUES ('7', '软件工程项目管理', '5', '0');
 INSERT INTO `course` VALUES ('8', 'C#编程技术', '4', '0');
 INSERT INTO `course` VALUES ('9', '安卓基础编程', '4', '0');
+INSERT INTO `course` VALUES ('10', '高等数学2', '6', '0');
 
 -- ----------------------------
 -- Table structure for dept
@@ -126,25 +128,29 @@ CREATE TABLE `evaluation` (
   `evaluation_no` int(10) NOT NULL,
   `item_no` int(10) NOT NULL,
   `student_num` int(11) default '0' COMMENT '0',
-  `score` float default '0'
+  `score` float default '0',
+  KEY `evaluation_no` (`evaluation_no`),
+  KEY `evaluation_item_fk` (`item_no`),
+  CONSTRAINT `evaluation_fk` FOREIGN KEY (`evaluation_no`) REFERENCES `teacher_class` (`evaluation_no`),
+  CONSTRAINT `evaluation_item_fk` FOREIGN KEY (`item_no`) REFERENCES `item` (`item_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of evaluation
 -- ----------------------------
-INSERT INTO `evaluation` VALUES ('1', '1', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '2', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '3', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '4', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '5', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '6', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '7', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '8', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '9', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '10', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '11', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '12', '0', '0');
-INSERT INTO `evaluation` VALUES ('1', '13', '0', '0');
+INSERT INTO `evaluation` VALUES ('1', '1', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '2', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '3', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '4', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '5', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '6', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '7', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '8', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '9', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '10', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '11', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '12', '8', '65');
+INSERT INTO `evaluation` VALUES ('1', '13', '8', '65');
 INSERT INTO `evaluation` VALUES ('2', '1', '0', '0');
 INSERT INTO `evaluation` VALUES ('2', '2', '0', '0');
 INSERT INTO `evaluation` VALUES ('2', '3', '0', '0');
@@ -171,19 +177,19 @@ INSERT INTO `evaluation` VALUES ('3', '10', '0', '0');
 INSERT INTO `evaluation` VALUES ('3', '11', '0', '0');
 INSERT INTO `evaluation` VALUES ('3', '12', '0', '0');
 INSERT INTO `evaluation` VALUES ('3', '13', '0', '0');
-INSERT INTO `evaluation` VALUES ('4', '1', '8', '750');
-INSERT INTO `evaluation` VALUES ('4', '2', '8', '750');
-INSERT INTO `evaluation` VALUES ('4', '3', '8', '700');
-INSERT INTO `evaluation` VALUES ('4', '4', '8', '740');
-INSERT INTO `evaluation` VALUES ('4', '5', '8', '740');
-INSERT INTO `evaluation` VALUES ('4', '6', '8', '740');
-INSERT INTO `evaluation` VALUES ('4', '7', '3', '265');
-INSERT INTO `evaluation` VALUES ('4', '8', '8', '690');
-INSERT INTO `evaluation` VALUES ('4', '9', '8', '690');
-INSERT INTO `evaluation` VALUES ('4', '10', '8', '690');
-INSERT INTO `evaluation` VALUES ('4', '11', '8', '690');
-INSERT INTO `evaluation` VALUES ('4', '12', '8', '680');
-INSERT INTO `evaluation` VALUES ('4', '13', '8', '680');
+INSERT INTO `evaluation` VALUES ('4', '1', '9', '73');
+INSERT INTO `evaluation` VALUES ('4', '2', '9', '72');
+INSERT INTO `evaluation` VALUES ('4', '3', '9', '72');
+INSERT INTO `evaluation` VALUES ('4', '4', '9', '72');
+INSERT INTO `evaluation` VALUES ('4', '5', '9', '72');
+INSERT INTO `evaluation` VALUES ('4', '6', '9', '72');
+INSERT INTO `evaluation` VALUES ('4', '7', '9', '72');
+INSERT INTO `evaluation` VALUES ('4', '8', '9', '73');
+INSERT INTO `evaluation` VALUES ('4', '9', '9', '72');
+INSERT INTO `evaluation` VALUES ('4', '10', '9', '72');
+INSERT INTO `evaluation` VALUES ('4', '11', '9', '70');
+INSERT INTO `evaluation` VALUES ('4', '12', '9', '71');
+INSERT INTO `evaluation` VALUES ('4', '13', '9', '71');
 INSERT INTO `evaluation` VALUES ('5', '1', '0', '0');
 INSERT INTO `evaluation` VALUES ('5', '2', '0', '0');
 INSERT INTO `evaluation` VALUES ('5', '3', '0', '0');
@@ -210,20 +216,20 @@ INSERT INTO `evaluation` VALUES ('6', '10', '0', '0');
 INSERT INTO `evaluation` VALUES ('6', '11', '0', '0');
 INSERT INTO `evaluation` VALUES ('6', '12', '0', '0');
 INSERT INTO `evaluation` VALUES ('6', '13', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '14', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '13', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '12', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '11', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '10', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '9', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '8', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '7', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '6', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '5', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '4', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '3', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '2', '0', '0');
-INSERT INTO `evaluation` VALUES ('10', '1', '0', '0');
+INSERT INTO `evaluation` VALUES ('10', '14', '1', '8');
+INSERT INTO `evaluation` VALUES ('10', '13', '1', '8');
+INSERT INTO `evaluation` VALUES ('10', '12', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '11', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '10', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '9', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '8', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '7', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '6', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '5', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '4', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '3', '1', '7');
+INSERT INTO `evaluation` VALUES ('10', '2', '1', '8');
+INSERT INTO `evaluation` VALUES ('10', '1', '1', '7');
 INSERT INTO `evaluation` VALUES ('11', '14', '0', '0');
 INSERT INTO `evaluation` VALUES ('11', '13', '0', '0');
 INSERT INTO `evaluation` VALUES ('11', '12', '0', '0');
@@ -238,20 +244,20 @@ INSERT INTO `evaluation` VALUES ('11', '4', '0', '0');
 INSERT INTO `evaluation` VALUES ('11', '3', '0', '0');
 INSERT INTO `evaluation` VALUES ('11', '2', '0', '0');
 INSERT INTO `evaluation` VALUES ('11', '1', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '1', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '2', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '3', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '4', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '5', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '6', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '7', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '8', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '9', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '10', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '11', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '12', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '13', '0', '0');
-INSERT INTO `evaluation` VALUES ('12', '14', '0', '0');
+INSERT INTO `evaluation` VALUES ('12', '1', '4', '35');
+INSERT INTO `evaluation` VALUES ('12', '2', '4', '36');
+INSERT INTO `evaluation` VALUES ('12', '3', '4', '35');
+INSERT INTO `evaluation` VALUES ('12', '4', '4', '36');
+INSERT INTO `evaluation` VALUES ('12', '5', '4', '36');
+INSERT INTO `evaluation` VALUES ('12', '6', '4', '35');
+INSERT INTO `evaluation` VALUES ('12', '7', '4', '36');
+INSERT INTO `evaluation` VALUES ('12', '8', '4', '36');
+INSERT INTO `evaluation` VALUES ('12', '9', '4', '36');
+INSERT INTO `evaluation` VALUES ('12', '10', '4', '36');
+INSERT INTO `evaluation` VALUES ('12', '11', '4', '35');
+INSERT INTO `evaluation` VALUES ('12', '12', '4', '34');
+INSERT INTO `evaluation` VALUES ('12', '13', '4', '34');
+INSERT INTO `evaluation` VALUES ('12', '14', '4', '34');
 INSERT INTO `evaluation` VALUES ('13', '1', '0', '0');
 INSERT INTO `evaluation` VALUES ('13', '2', '0', '0');
 INSERT INTO `evaluation` VALUES ('13', '3', '0', '0');
@@ -406,6 +412,34 @@ INSERT INTO `evaluation` VALUES ('23', '11', '0', '0');
 INSERT INTO `evaluation` VALUES ('23', '12', '0', '0');
 INSERT INTO `evaluation` VALUES ('23', '13', '0', '0');
 INSERT INTO `evaluation` VALUES ('23', '14', '0', '0');
+INSERT INTO `evaluation` VALUES ('24', '1', '3', '22');
+INSERT INTO `evaluation` VALUES ('24', '2', '3', '23');
+INSERT INTO `evaluation` VALUES ('24', '3', '3', '23');
+INSERT INTO `evaluation` VALUES ('24', '4', '3', '22');
+INSERT INTO `evaluation` VALUES ('24', '5', '3', '24');
+INSERT INTO `evaluation` VALUES ('24', '6', '3', '23');
+INSERT INTO `evaluation` VALUES ('24', '7', '3', '23');
+INSERT INTO `evaluation` VALUES ('24', '8', '3', '25');
+INSERT INTO `evaluation` VALUES ('24', '9', '3', '25');
+INSERT INTO `evaluation` VALUES ('24', '10', '3', '26');
+INSERT INTO `evaluation` VALUES ('24', '11', '3', '24');
+INSERT INTO `evaluation` VALUES ('24', '12', '3', '25');
+INSERT INTO `evaluation` VALUES ('24', '13', '3', '26');
+INSERT INTO `evaluation` VALUES ('24', '14', '3', '26');
+INSERT INTO `evaluation` VALUES ('25', '1', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '2', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '3', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '4', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '5', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '6', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '7', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '8', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '9', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '10', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '11', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '12', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '13', '0', '0');
+INSERT INTO `evaluation` VALUES ('25', '14', '0', '0');
 
 -- ----------------------------
 -- Table structure for evaluation_status
@@ -413,17 +447,24 @@ INSERT INTO `evaluation` VALUES ('23', '14', '0', '0');
 DROP TABLE IF EXISTS `evaluation_status`;
 CREATE TABLE `evaluation_status` (
   `student_no` int(10) NOT NULL,
-  `evaluation_no` int(10) NOT NULL
+  `evaluation_no` int(10) NOT NULL,
+  KEY `eval_status_student_no` (`student_no`),
+  CONSTRAINT `eval_status_student_no` FOREIGN KEY (`student_no`) REFERENCES `student` (`student_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of evaluation_status
 -- ----------------------------
 INSERT INTO `evaluation_status` VALUES ('13270132', '0');
-INSERT INTO `evaluation_status` VALUES ('13270132', '0');
-INSERT INTO `evaluation_status` VALUES ('13270132', '0');
-INSERT INTO `evaluation_status` VALUES ('13270132', '0');
 INSERT INTO `evaluation_status` VALUES ('13270131', '0');
+INSERT INTO `evaluation_status` VALUES ('13270131', '12');
+INSERT INTO `evaluation_status` VALUES ('13270119', '12');
+INSERT INTO `evaluation_status` VALUES ('13270132', '0');
+INSERT INTO `evaluation_status` VALUES ('13270119', '24');
+INSERT INTO `evaluation_status` VALUES ('13270131', '24');
+INSERT INTO `evaluation_status` VALUES ('13270129', '4');
+INSERT INTO `evaluation_status` VALUES ('13270129', '10');
+INSERT INTO `evaluation_status` VALUES ('13270129', '24');
 
 -- ----------------------------
 -- Table structure for evaluation_time
@@ -439,7 +480,7 @@ CREATE TABLE `evaluation_time` (
 -- ----------------------------
 -- Records of evaluation_time
 -- ----------------------------
-INSERT INTO `evaluation_time` VALUES ('2017', '0', '2017-06-04 13:00', '2017-06-06 14:00');
+INSERT INTO `evaluation_time` VALUES ('2017', '0', '2017-06-13 13:00', '2017-06-15 01:00');
 
 -- ----------------------------
 -- Table structure for item
@@ -450,7 +491,9 @@ CREATE TABLE `item` (
   `category_no` int(10) NOT NULL,
   `name` varchar(100) NOT NULL,
   `is_active` int(10) NOT NULL default '0',
-  PRIMARY KEY  (`item_no`)
+  PRIMARY KEY  (`item_no`),
+  KEY `item_fk` (`category_no`),
+  CONSTRAINT `item_fk` FOREIGN KEY (`category_no`) REFERENCES `category` (`category_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -468,9 +511,9 @@ INSERT INTO `item` VALUES ('9', '3', '上课是否精彩，不感到乏味', '0'
 INSERT INTO `item` VALUES ('10', '3', '上课节奏是否跟上', '0');
 INSERT INTO `item` VALUES ('11', '3', '老师所讲知识，是否听懂', '0');
 INSERT INTO `item` VALUES ('12', '4', '老师是否充分备课，熟悉课程内容', '0');
-INSERT INTO `item` VALUES ('13', '4', '是否有缺课迟到情况', '0');
+INSERT INTO `item` VALUES ('13', '4', '是否有缺课迟到情况 ', '0');
 INSERT INTO `item` VALUES ('14', '4', '是否列举大量实践扩展知识', '0');
-INSERT INTO `item` VALUES ('15', '4', 'c 点多去', '-1');
+INSERT INTO `item` VALUES ('15', '4', 'c 点多去A', '-1');
 
 -- ----------------------------
 -- Table structure for major
@@ -481,7 +524,9 @@ CREATE TABLE `major` (
   `dept_no` int(20) NOT NULL,
   `name` varchar(30) NOT NULL,
   `establish_date` date NOT NULL,
-  PRIMARY KEY  (`major_no`)
+  PRIMARY KEY  (`major_no`),
+  KEY `dept_fk` (`dept_no`),
+  CONSTRAINT `dept_fk` FOREIGN KEY (`dept_no`) REFERENCES `dept` (`dept_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -520,13 +565,18 @@ CREATE TABLE `student` (
   `major_no` int(20) NOT NULL,
   `class_no` int(20) NOT NULL,
   `is_active` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`student_no`)
+  PRIMARY KEY  (`student_no`),
+  CONSTRAINT `stu_fk` FOREIGN KEY (`student_no`) REFERENCES `user` (`user_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
+INSERT INTO `student` VALUES ('13270101', '1', '1', '1', '0');
+INSERT INTO `student` VALUES ('13270111', '1', '1', '1', '0');
+INSERT INTO `student` VALUES ('13270112', '1', '1', '1', '0');
 INSERT INTO `student` VALUES ('13270119', '1', '1', '1', '0');
+INSERT INTO `student` VALUES ('13270129', '1', '1', '1', '0');
 INSERT INTO `student` VALUES ('13270130', '1', '1', '1', '0');
 INSERT INTO `student` VALUES ('13270131', '1', '1', '1', '0');
 INSERT INTO `student` VALUES ('13270132', '1', '1', '1', '0');
@@ -539,17 +589,19 @@ CREATE TABLE `teacher` (
   `teacher_no` int(20) NOT NULL,
   `dept_no` int(30) NOT NULL,
   `rank` varchar(30) default NULL COMMENT '教师职称',
-  PRIMARY KEY  (`teacher_no`)
+  PRIMARY KEY  (`teacher_no`),
+  CONSTRAINT `te_fk` FOREIGN KEY (`teacher_no`) REFERENCES `user` (`user_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES ('10001', '1', '系主任');
+INSERT INTO `teacher` VALUES ('10001', '1', '副教授');
 INSERT INTO `teacher` VALUES ('10002', '2', '教师');
 INSERT INTO `teacher` VALUES ('10003', '2', '教师');
 INSERT INTO `teacher` VALUES ('10004', '2', '教师');
 INSERT INTO `teacher` VALUES ('10005', '2', '教师');
+INSERT INTO `teacher` VALUES ('10008', '5', '教授');
 
 -- ----------------------------
 -- Table structure for teacher_class
@@ -563,7 +615,13 @@ CREATE TABLE `teacher_class` (
   `term` int(5) NOT NULL,
   `class_no` int(11) NOT NULL,
   `is_active` int(11) default '0',
-  PRIMARY KEY  (`evaluation_no`)
+  PRIMARY KEY  (`evaluation_no`),
+  KEY `teach_class_teacherNo` (`teacher_no`),
+  KEY `teach_class_courseNo` (`course_no`),
+  KEY `teach_class_classNo` (`class_no`),
+  CONSTRAINT `teach_class_classNo` FOREIGN KEY (`class_no`) REFERENCES `class` (`class_no`),
+  CONSTRAINT `teach_class_courseNo` FOREIGN KEY (`course_no`) REFERENCES `course` (`course_no`),
+  CONSTRAINT `teach_class_teacherNo` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teacher_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -590,6 +648,8 @@ INSERT INTO `teacher_class` VALUES ('20', '10005', '9', '2017', '0', '16', '0');
 INSERT INTO `teacher_class` VALUES ('21', '10005', '9', '2017', '0', '14', '0');
 INSERT INTO `teacher_class` VALUES ('22', '10005', '9', '2017', '0', '13', '0');
 INSERT INTO `teacher_class` VALUES ('23', '10005', '9', '2017', '0', '15', '0');
+INSERT INTO `teacher_class` VALUES ('24', '10008', '10', '2017', '0', '1', '0');
+INSERT INTO `teacher_class` VALUES ('25', '10008', '10', '2017', '0', '2', '0');
 
 -- ----------------------------
 -- Table structure for user
@@ -606,7 +666,9 @@ CREATE TABLE `user` (
   `address` varchar(100) default NULL,
   `phone` varchar(20) default NULL,
   `is_active` int(11) unsigned default '0' COMMENT '用户是否被删除，是否可用状态，0可用-1不可用',
-  PRIMARY KEY  (`user_no`)
+  PRIMARY KEY  (`user_no`),
+  KEY `role_fk` (`user_role`),
+  CONSTRAINT `role_fk` FOREIGN KEY (`user_role`) REFERENCES `role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -616,9 +678,14 @@ INSERT INTO `user` VALUES ('1001', 'admin', '1234', '1', '男', '2017-05-28', nu
 INSERT INTO `user` VALUES ('10001', '张其文', '1234', '2', '男', '2000-07-01', null, null, null, '0');
 INSERT INTO `user` VALUES ('10002', '高伟军', '1234', '2', '男', '2000-07-01', null, null, null, '0');
 INSERT INTO `user` VALUES ('10003', '张聚礼', '1234', '2', '男', '2000-07-01', null, null, null, '0');
-INSERT INTO `user` VALUES ('10004', '柯明', '1234', '2', '女', '2000-07-01', null, null, null, '0');
+INSERT INTO `user` VALUES ('10004', '柯铭', '1234', '2', '女', '2000-07-01', null, null, null, '0');
 INSERT INTO `user` VALUES ('10005', '任旭鹏', '1234', '2', '男', '2000-07-01', null, null, null, '0');
-INSERT INTO `user` VALUES ('13270119', '陈德镇', '1234', '3', '男', null, null, null, '18893261423', '0');
+INSERT INTO `user` VALUES ('10008', '田振际', '1234', '2', '男', null, null, null, '12345678232', '0');
+INSERT INTO `user` VALUES ('13270101', '王阔', '1234', '3', '男', null, null, null, '18893261423', '0');
+INSERT INTO `user` VALUES ('13270111', '张三', '1234', '3', '男', null, null, null, '18893261423', '0');
+INSERT INTO `user` VALUES ('13270112', '李四', '1234', '3', '男', null, null, null, '18893261423', '0');
+INSERT INTO `user` VALUES ('13270119', '李致拓', '1234', '3', '男', null, null, null, '18893261423', '0');
+INSERT INTO `user` VALUES ('13270129', '何兴', '1234', '3', '男', null, null, null, '18893261423', '0');
 INSERT INTO `user` VALUES ('13270130', '祁生龙', '1234', '3', '男', null, null, null, '18893261423', '0');
 INSERT INTO `user` VALUES ('13270131', '史季青', '1234', '3', '男', null, null, null, '18893261423', '0');
 INSERT INTO `user` VALUES ('13270132', '文震杰', '1234', '3', '男', '2013-07-01', null, null, null, '0');

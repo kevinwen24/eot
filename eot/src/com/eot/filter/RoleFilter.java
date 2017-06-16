@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.eot.model.User;
 
 /**
@@ -48,7 +50,7 @@ public class RoleFilter implements Filter {
 					resp.sendRedirect(req.getContextPath() + "/page/student/show");
 				}
 			}  else if (user.getRoleId() == 2){
-				
+				resp.sendRedirect(req.getContextPath() + "/page/teacher/teacher_page_rank");
 			} else {
 				chain.doFilter(req, resp);
 			}

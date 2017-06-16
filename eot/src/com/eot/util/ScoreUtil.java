@@ -6,11 +6,11 @@ public class ScoreUtil {
 		float score = 0;
 		
 		switch(str){
-			case "A" : score = 95 ;break;
-			case "B" : score = 85 ;break;
-			case "C" : score = 70 ;break;
-			case "D" : score = 60 ;break;
-			case "E" : score = 50 ;break;
+			case "A" : score = 9 ;break;
+			case "B" : score = 8 ;break;
+			case "C" : score = 7 ;break;
+			case "D" : score = 6 ;break;
+			case "E" : score = 5 ;break;
 			default : score = 0;
 		}
 		return score;

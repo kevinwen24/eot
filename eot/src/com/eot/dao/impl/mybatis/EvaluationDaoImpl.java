@@ -17,6 +17,9 @@ public class EvaluationDaoImpl extends SqlSessionDaoSupport implements IEvaluati
 	private static final String SQL_ID_GET_STU_NEED_EVALUATION_ITEM = ".getStudentNeedEvaluationItemByevaluationNo";
 	private static final String SQL_ID_ADD_EVALUATION_ITEM_TO_EVALUATIONNO = ".addEvaluationItemToevaluationNo";
 	private static final String SQL_ID_GET_STUDENT_ALL_NEED_EVALUCATION = ".getStudentAllNeedEvaluatonClass";
+	private static final String SQL_ID_allTeacherTeaching = ".allTeacherTeaching";
+	private static final String SQL_ID_findEvaluationNoGroupByCondition = ".findEvaluationNoGroupByCondition";
+	private static final String SQL_ID_allEvaluationNoAvg = ".allEvaluationNoAvg";
 	
 	@Override
 	public void updateScoreAndStuNum(int evaluationNo, int itemNo, float score) {
@@ -45,6 +48,29 @@ public class EvaluationDaoImpl extends SqlSessionDaoSupport implements IEvaluati
 		params.put("year", year);
 		
 		return getSqlSession().selectList(CLASS_NAME + SQL_ID_GET_STUDENT_ALL_NEED_EVALUCATION, params);
+	}
+
+	@Override
+	public List<Evaluation> allTeacherTeaching() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList(CLASS_NAME + SQL_ID_allTeacherTeaching);
+	}
+
+	@Override
+	public List<Evaluation> findEvaluationNoGroupByCondition(int teacherNo, int courseNo, String year, int term) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("teacherNo", teacherNo);
+		params.put("courseNo", courseNo);
+		params.put("term", term);
+		params.put("year", year);
+		
+		return getSqlSession().selectList(CLASS_NAME + SQL_ID_findEvaluationNoGroupByCondition, params);
+	}
+
+	@Override
+	public List<Evaluation> allEvaluationNoAvg() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectList(CLASS_NAME + SQL_ID_allEvaluationNoAvg);
 	}
 	
 }

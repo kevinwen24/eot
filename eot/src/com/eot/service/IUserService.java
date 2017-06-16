@@ -2,6 +2,7 @@ package com.eot.service;
 
 import java.util.List;
 
+import com.eot.model.Teacher;
 import com.eot.model.User;
 
 public interface IUserService {
@@ -11,4 +12,6 @@ public interface IUserService {
 	public User getUserByUserId(int userId);
 	
 	public void addStudent(List<User> users);
+	
+	public void addTeacher(Teacher teacher);
 }

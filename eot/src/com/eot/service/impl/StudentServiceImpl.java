@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.eot.dao.IStudentDao;
 import com.eot.dao.IUserDao;
 import com.eot.exception.ExistSchoolInfoException;
+import com.eot.exception.NotEmptyException;
 import com.eot.model.Student;
 import com.eot.model.User;
 import com.eot.service.IStudentService;
@@ -56,13 +57,18 @@ public class StudentServiceImpl implements IStudentService{
 	}
 
 	@Override
-	public boolean batchImport(String name, MultipartFile file) throws ExistSchoolInfoException{
+	public boolean batchImport(String name, MultipartFile file) throws ExistSchoolInfoException,NotEmptyException{
 
 		 boolean b = false;
 	        //创建处理EXCEL
 	        ReadExcel readExcel=new ReadExcel();
 	        //解析excel，获取客户信息集合。
-	        List<Student> studentList = readExcel.getExcelInfo(name ,file);
+	        List<Student> studentList = null;
+			try {
+				studentList = readExcel.getExcelInfo(name ,file);
+			} catch (NotEmptyException e) {
+				throw new NotEmptyException(e.getMessage());
+			}
 
 	        if(studentList != null){
 	            b = true;
@@ -115,8 +121,8 @@ public class StudentServiceImpl implements IStudentService{
 	        	users.add(user);
 	        }
 	        
-	        iStudentDao.addBatchStudent(studentList);
 	        iUserDao.addBatchUser(users);
+	        iStudentDao.addBatchStudent(studentList);
 	        return b;
 	}
 
